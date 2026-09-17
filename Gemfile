@@ -22,6 +22,8 @@ gem "kamal", require: false
 gem "thruster", require: false
 gem "image_processing", "~> 1.2"
 
+gem "lexxy", "~> 0.9.23"
+
 group :development, :test do
   gem "faker"
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
