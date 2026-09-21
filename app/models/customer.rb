@@ -7,6 +7,8 @@ class Customer < ApplicationRecord
             unless: :skip_unique_name_validation,
             on: :create
 
+  enum :customer_type, %w[ customer lead ].index_by(&:itself), default: :customer
+
   def name
     [ first_name, last_name ].compact.reject(&:empty?).join(" ")
   end
