@@ -8,14 +8,14 @@ class Customer < ApplicationRecord
             on: :create
 
   def name
-    [ first_name, last_name ].reject(&:empty?).join(" ")
+    [ first_name, last_name ].compact.reject(&:empty?).join(" ")
   end
 
   def sortable_name
-    [ last_name, first_name ].reject(&:empty?).join(", ")
+    [ last_name, first_name ].compact.reject(&:empty?).join(", ")
   end
 
   def initials
-    [ first_name&.first, last_name[...2] ].join.upcase[...2]
+    [ first_name&.first, last_name.first(2) ].join.upcase.first(2)
   end
 end
