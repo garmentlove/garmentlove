@@ -1,6 +1,9 @@
 class Customer < ApplicationRecord
   attr_accessor :skip_unique_name_validation
 
+  has_one :address, -> { primary }, as: :addressable
+  has_one :billing_address, -> { billing }, class_name: "Address", as: :addressable
+
   validates :last_name, presence: true
   validates :first_name,
             uniqueness: { scope: :last_name, message: "and last name already exists" },
@@ -19,5 +22,9 @@ class Customer < ApplicationRecord
 
   def initials
     [ first_name&.first, last_name.first(2) ].join.upcase.first(2)
+  end
+
+  def billing_address
+    super || address
   end
 end
