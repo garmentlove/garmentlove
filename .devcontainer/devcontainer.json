@@ -24,7 +24,15 @@
   "forwardPorts": [3000],
 
   // Configure tool-specific properties.
-  // "customizations": {},
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "ollama.endpoint": "http://host.docker.internal:11434"
+      }
+    }
+  },
+
+  "securityOpt": ["seccomp=unconfined"],
 
   // Uncomment to connect as root instead. More info: https://containers.dev/implementors/json_reference/#remoteUser.
   // "remoteUser": "root",
