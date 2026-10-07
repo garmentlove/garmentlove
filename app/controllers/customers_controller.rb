@@ -13,10 +13,12 @@ class CustomersController < ApplicationController
   # GET /customers/new
   def new
     @customer = Customer.new
+    build_associations
   end
 
   # GET /customers/1/edit
   def edit
+    build_associations
   end
 
   # POST /customers or /customers.json
@@ -63,8 +65,24 @@ class CustomersController < ApplicationController
       @customer = Customer.find(params.expect(:id))
     end
 
+    def build_associations
+      @customer.build_address unless @customer.address.present?
+      @customer.build_cellphone unless @customer.cellphone.present?
+    end
+
     # Only allow a list of trusted parameters through.
     def customer_params
-      params.expect(customer: [ :first_name, :last_name, :skip_unique_name_validation, :customer_type ])
+        params.expect(customer: [
+          :first_name,
+          :last_name,
+          :skip_unique_name_validation,
+          :customer_type,
+          address_attributes: [
+            :street, :street2, :city, :state, :zip, :country
+          ],
+          cellphone_attributes: [
+            :number
+          ]
+        ])
     end
 end
