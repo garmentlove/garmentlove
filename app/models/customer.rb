@@ -4,6 +4,9 @@ class Customer < ApplicationRecord
   has_one :address, -> { primary }, as: :addressable
   has_one :billing_address, -> { billing }, class_name: "Address", as: :addressable
 
+  has_one :cellphone, -> { cellphone }, class_name: "Telephone", as: :reachable
+  has_one :homephone, -> { home }, class_name: "Telephone", as: :reachable
+
   validates :last_name, presence: true
   validates :first_name,
             uniqueness: { scope: :last_name, message: "and last name already exists" },

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2026_09_21_014001) do
+ActiveRecord::Schema[8.2].define(version: 2026_09_21_020409) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -70,6 +70,16 @@ ActiveRecord::Schema[8.2].define(version: 2026_09_21_014001) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "customer_type", default: "customer", null: false
+  end
+
+  create_table "telephones", force: :cascade do |t|
+    t.integer "designation", default: 0, null: false
+    t.string "number", null: false
+    t.string "reachable_type", null: false
+    t.integer "reachable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["reachable_type", "reachable_id"], name: "index_telephones_on_reachable"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
