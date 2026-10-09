@@ -3,6 +3,8 @@ class Identity < ApplicationRecord
 
   belongs_to :customer, foreign_key: :userable_id, class_name: "Customer", optional: true
 
+  has_many :magic_links
+
   class << self
     def find_for_autentication(value)
       find_by_email(value) || find_by_cellphone(value)

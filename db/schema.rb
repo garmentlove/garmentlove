@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2026_10_09_175448) do
+ActiveRecord::Schema[8.2].define(version: 2026_10_09_191025) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -91,6 +91,16 @@ ActiveRecord::Schema[8.2].define(version: 2026_10_09_175448) do
     t.index ["userable_type", "userable_id"], name: "index_identities_on_userable"
   end
 
+  create_table "magic_links", force: :cascade do |t|
+    t.string "code", limit: 255, null: false
+    t.datetime "expires_at", null: false
+    t.integer "identity_id", null: false
+    t.integer "purpose"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["identity_id"], name: "index_magic_links_on_identity_id"
+  end
+
   create_table "telephones", force: :cascade do |t|
     t.integer "designation", default: 0, null: false
     t.string "number", null: false
@@ -104,4 +114,5 @@ ActiveRecord::Schema[8.2].define(version: 2026_10_09_175448) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "magic_links", "identities"
 end
