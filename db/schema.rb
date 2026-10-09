@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2026_10_08_000000) do
+ActiveRecord::Schema[8.2].define(version: 2026_10_09_175448) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -81,6 +81,14 @@ ActiveRecord::Schema[8.2].define(version: 2026_10_08_000000) do
     t.datetime "updated_at", null: false
     t.index ["address"], name: "index_email_addresses_on_address"
     t.index ["emailable_type", "emailable_id"], name: "index_email_addresses_on_emailable"
+  end
+
+  create_table "identities", force: :cascade do |t|
+    t.string "userable_type", null: false
+    t.integer "userable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["userable_type", "userable_id"], name: "index_identities_on_userable"
   end
 
   create_table "telephones", force: :cascade do |t|

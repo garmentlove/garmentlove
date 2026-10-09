@@ -3,7 +3,7 @@ class Telephone < ApplicationRecord
 
   validates :number, presence: true, phone: true, uniqueness: { scope: :reachable_type }
 
-  enum :designation, %w[ cell home ], default: :cellphone
+  enum :designation, %w[ cell home ], default: :cell
 
   normalizes :number, with: ->(n) { Phonelib.parse(n).sanitized }
 

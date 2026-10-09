@@ -1,4 +1,6 @@
 class Customer < ApplicationRecord
+  include Identifiable
+
   attr_accessor :skip_unique_name_validation
 
   has_one :address, -> { primary }, as: :addressable, dependent: :destroy
