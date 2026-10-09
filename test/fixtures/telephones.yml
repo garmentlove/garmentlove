@@ -1,13 +1,14 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  designation: cellphone
-  number: 555-0100
-  reachable: one
-  reachable_type: Reachable
+  number: 5555550100
+  reachable: one (Customer)
 
 two:
+  number: 5555550200
+  reachable: two (Customer)
+
+three:
   designation: home
-  number: 555-0200
-  reachable: two
-  reachable_type: Reachable
+  number: 5555550300
+  reachable: one (Customer)

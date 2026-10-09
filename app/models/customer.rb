@@ -4,7 +4,7 @@ class Customer < ApplicationRecord
   has_one :address, -> { primary }, as: :addressable, dependent: :destroy
   has_one :billing_address, -> { billing }, class_name: "Address", as: :addressable, dependent: :destroy
 
-  has_one :cellphone, -> { cellphone }, class_name: "Telephone", as: :reachable, dependent: :destroy
+  has_one :cellphone, -> { cell }, class_name: "Telephone", as: :reachable, dependent: :destroy
   has_one :homephone, -> { home }, class_name: "Telephone", as: :reachable, dependent: :destroy
 
   has_one :email, -> { primary }, class_name: "EmailAddress", as: :emailable, dependent: :destroy
