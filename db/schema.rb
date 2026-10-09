@@ -79,17 +79,18 @@ ActiveRecord::Schema[8.2].define(version: 2026_10_08_000000) do
     t.integer "emailable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["address"], name: "index_email_addresses_on_address", unique: true
+    t.index ["address"], name: "index_email_addresses_on_address"
     t.index ["emailable_type", "emailable_id"], name: "index_email_addresses_on_emailable"
   end
 
   create_table "telephones", force: :cascade do |t|
     t.integer "designation", default: 0, null: false
     t.string "number", null: false
-    t.string "reachable_type"
-    t.integer "reachable_id"
+    t.string "reachable_type", null: false
+    t.integer "reachable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["number"], name: "index_telephones_on_number"
     t.index ["reachable_type", "reachable_id"], name: "index_telephones_on_reachable"
   end
 

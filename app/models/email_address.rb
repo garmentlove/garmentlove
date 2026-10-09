@@ -1,7 +1,7 @@
 class EmailAddress < ApplicationRecord
   belongs_to :emailable, polymorphic: true
 
-  validates :address, presence: true, uniqueness: true,
+  validates :address, presence: true, uniqueness: { scope: :emailable_type },
             format: { with: URI::MailTo::EMAIL_REGEXP }
 
   enum :designation, %w[ primary secondary ], default: :primary
