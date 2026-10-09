@@ -88,14 +88,14 @@ class CustomersController < ApplicationController
     end
 
     def address_params
-      [ :street, :street2, :city, :state, :zip, :country, :_destroy  ]
+      [ :id, :street, :street2, :city, :state, :zip, :country, :_destroy  ]
     end
 
     def telephone_params
-      [ :number, :_destroy ]
+      [ :id, :number, :_destroy ]
     end
 
     def email_address_params
-      [ :address, :_destroy ]
+      [ :id, :address, :_destroy ]
     end
 end

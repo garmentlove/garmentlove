@@ -1,0 +1,9 @@
+<%= form.fields_for attribute do |telephone_form| %>
+  <%= telephone_form.hidden_field :id %> 
+  <%= telephone_form.hidden_field :_destroy %>
+
+  <div class="my-5">
+    <%= telephone_form.label :number, attribute.to_s.humanize %>
+    <%= telephone_form.text_field :number, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": model.errors[:number].blank?, "border-red-400 focus:outline-red-600": model.errors[:number].present?}] %>
+  </div>
+<% end %>

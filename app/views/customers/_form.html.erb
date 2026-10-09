@@ -13,7 +13,7 @@
 
   <div class="my-5">
     <%= form.label :type %>
-    <%= form.select :customer_type, Customer.customer_types.keys.map { |key| [ key.humanize, key ]}, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": customer.errors[:first_name].none?, "border-red-400 focus:outline-red-600": customer.errors[:first_name].any?}] %>
+    <%= form.select :customer_type, Customer.customer_types.keys.map { |key| [ key.humanize, key ]}, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": customer.errors[:customer_type].none?, "border-red-400 focus:outline-red-600": customer.errors[:customer_type].any?}] %>
   </div>
 
   <div class="my-5">
@@ -26,46 +26,9 @@
     <%= form.text_field :last_name, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": customer.errors[:last_name].none?, "border-red-400 focus:outline-red-600": customer.errors[:last_name].any?}] %>
   </div>
 
-  <%= form.fields_for :address do |address_form| %>
-    <div class="my-5">
-      <%= address_form.label :street %>
-      <%= address_form.text_field :street, class: "block shadow-sm rounded-md border px-3 py-2 mt-2 w-full" %>
-    </div>
-    <div class="my-5">
-      <%= address_form.label :street2 %>
-      <%= address_form.text_field :street2, class: "block shadow-sm rounded-md border px-3 py-2 mt-2 w-full" %>
-    </div>
-    <div class="my-5">
-      <%= address_form.label :city %>
-      <%= address_form.text_field :city, class: "block shadow-sm rounded-md border px-3 py-2 mt-2 w-full" %>
-    </div>
-    <div class="my-5">
-      <%= address_form.label :state %>
-      <%= address_form.text_field :state, class: "block shadow-sm rounded-md border px-3 py-2 mt-2 w-full" %>
-    </div>
-    <div class="my-5">
-      <%= address_form.label :zip %>
-      <%= address_form.text_field :zip, class: "block shadow-sm rounded-md border px-3 py-2 mt-2 w-full" %>
-    </div>
-    <div class="my-5">
-      <%= address_form.label :country %>
-      <%= address_form.text_field :country, class: "block shadow-sm rounded-md border px-3 py-2 mt-2 w-full" %>
-    </div>
-  <% end %>
-
-  <%= form.fields_for :cellphone do |cell_form| %>
-    <div class="my-5">
-      <%= cell_form.label :number, "Cellphone" %>
-      <%= cell_form.text_field :number, class: "block shadow-sm rounded-md border px-3 py-2 mt-2 w-full" %>
-    </div>
-  <% end %>
-
-  <%= form.fields_for :email do |email_form| %>
-    <div class="my-5">
-      <%= email_form.label :email, "Email" %>
-      <%= email_form.text_field :address, class: "block shadow-sm rounded-md border px-3 py-2 mt-2 w-full" %>
-    </div>
-  <% end %>
+  <%= render "customers/form/telephone", form: form, attribute: :cellphone, model: customer.cellphone %>
+  <%= render "customers/form/email", form: form, attribute: :email, model: customer.email %>
+  <%= render "customers/form/address", form: form, attribute: :address, model: customer.address %>
 
   <% if customer.errors[:first_name].include?("and last name already exists") %>
     <%= form.hidden_field :skip_unique_name_validation, value: true %>

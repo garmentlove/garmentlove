@@ -19,7 +19,11 @@ class Customer < ApplicationRecord
   enum :customer_type, %w[ customer lead ].index_by(&:itself), default: :customer
 
   accepts_nested_attributes_for :address, :billing_address, :cellphone, :homephone, :email, :secondary_email,
-                                reject_if: :all_blank, allow_destroy: true
+                                allow_destroy: true, reject_if: :all_blank
+
+  def to_s
+    name
+  end
 
   def name
     [ first_name, last_name ].compact.reject(&:empty?).join(" ")

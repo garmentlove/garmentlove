@@ -7,4 +7,8 @@ class EmailAddress < ApplicationRecord
   enum :designation, %w[ primary secondary ], default: :primary
 
   normalizes :address, with: ->(e) { e.to_s.strip }
+
+  def to_s
+    address
+  end
 end

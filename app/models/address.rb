@@ -8,6 +8,11 @@ class Address < ApplicationRecord
   normalizes :street, :street2, :city, :state, :country, :zip,
              with: ->(value) { value.strip.upcase }
 
+
+  def to_s
+    mailing
+  end
+
   def mailing
     [ street, street2, city, state, zip, country ].compact.join(" ")
   end

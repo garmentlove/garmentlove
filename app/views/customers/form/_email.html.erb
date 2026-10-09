@@ -1,0 +1,9 @@
+<%= form.fields_for attribute do |email_form| %>
+  <%= email_form.hidden_field :id %> 
+  <%= email_form.hidden_field :_destroy %>
+
+  <div class="my-5">
+    <%= email_form.label :email, attribute.to_s.humanize %>
+    <%= email_form.text_field :address, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": model.errors[:address].blank?, "border-red-400 focus:outline-red-600": model.errors[:address].present?}] %>
+  </div>
+<% end %>

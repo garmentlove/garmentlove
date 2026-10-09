@@ -2,7 +2,6 @@
 
 one:
   street: 225 Baker St NW
-  street2: MyString
   city: Atlanta
   state: GA
   country: 30263
