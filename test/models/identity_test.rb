@@ -17,20 +17,20 @@ class IdentityTest < ActiveSupport::TestCase
 
   # Test lookup methods
   test "find_by_email returns correct identity" do
-    identity = Identity.find_by_email("test@example.com")
+    identity = Identity.find_by_email("test@example.com", with: :customer)
     assert identity
     assert_equal identities(:one), identity
   end
 
   test "find_by_cellphone returns correct identity" do
-    identity = Identity.find_by_cellphone("5555550100")
+    identity = Identity.find_by_cellphone("5555550100", with: :customer)
     assert identity
     assert_equal identities(:one), identity
   end
 
   test "find_for_autentication finds by email or cellphone" do
-    identity_email = Identity.find_for_autentication("test@example.com")
-    identity_phone = Identity.find_for_autentication("5555550100")
+    identity_email = Identity.find_for_autentication("test@example.com", with: :customer)
+    identity_phone = Identity.find_for_autentication("5555550100", with: :customer)
     assert_equal identities(:one), identity_email
     assert_equal identities(:one), identity_phone
   end

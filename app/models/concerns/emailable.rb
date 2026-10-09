@@ -10,4 +10,8 @@ module Emailable
     accepts_nested_attributes_for :email, :secondary_email,
                                   allow_destroy: true, reject_if: :all_blank
   end
+
+  def email=(address)
+    (email || build_email).address = address
+  end
 end

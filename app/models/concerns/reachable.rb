@@ -10,4 +10,8 @@ module Reachable
     accepts_nested_attributes_for :cellphone, :homephone,
                                   allow_destroy: true, reject_if: :all_blank
   end
+
+  def cellphone=(number)
+    (cellphone || build_cellphone).number = number
+  end
 end
