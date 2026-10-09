@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-theme="light">
+<html data-theme="dark">
   <head>
     <title><%= content_for(:title) || "Garmentlove" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -35,16 +35,14 @@
             </span>
           <% end %>
 
-          <nav aria-label="Main navigation" class="gl-nav">
-            <%= link_to "Customers", customers_path, class: "gl-nav-link gl-nav-link-active" %>
-            <%= link_to "Add customer", new_customer_path, class: "gl-nav-link gl-hidden-small" %>
-          </nav>
         </div>
       </header>
 
       <main class="gl-main">
         <%= yield %>
       </main>
+
+      <%= render "shared/body/dock" %>
     </div>
   </body>
 </html>
