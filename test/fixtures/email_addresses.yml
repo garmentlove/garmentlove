@@ -1,0 +1,12 @@
+one:
+  address: test@example.com
+  emailable: one (Customer)
+
+two:
+  address: test2@example.com
+  emailable: two (Customer)
+
+three:
+  address: test3@example.com
+  emailable: two (Customer)
+  designation: secondary

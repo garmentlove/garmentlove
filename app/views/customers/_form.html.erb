@@ -60,6 +60,13 @@
     </div>
   <% end %>
 
+  <%= form.fields_for :email do |email_form| %>
+    <div class="my-5">
+      <%= email_form.label :email, "Email" %>
+      <%= email_form.text_field :address, class: "block shadow-sm rounded-md border px-3 py-2 mt-2 w-full" %>
+    </div>
+  <% end %>
+
   <% if customer.errors[:first_name].include?("and last name already exists") %>
     <%= form.hidden_field :skip_unique_name_validation, value: true %>
     <%= form.submit "Create anyway?", class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>

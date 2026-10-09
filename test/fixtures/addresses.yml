@@ -1,23 +1,18 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  street: MyString
+  street: 225 Baker St NW
   street2: MyString
-  city: MyString
-  state: MyString
-  country: MyString
-  zip: MyString
-  addressable: one
-  addressable_type: Addressable
-  designation: 1
+  city: Atlanta
+  state: GA
+  country: 30263
+  zip: USA
+  addressable: one (Customer)
 
 two:
-  street: MyString
-  street2: MyString
-  city: MyString
-  state: MyString
-  country: MyString
-  zip: MyString
-  addressable: two
-  addressable_type: Addressable
-  designation: 1
+  street: 121 Baker St NW
+  city: Atlanta
+  state: GA
+  country: USA
+  zip: 30313
+  addressable: two (Customer)

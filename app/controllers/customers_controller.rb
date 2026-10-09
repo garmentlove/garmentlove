@@ -68,6 +68,7 @@ class CustomersController < ApplicationController
     def build_associations
       @customer.build_address unless @customer.address.present?
       @customer.build_cellphone unless @customer.cellphone.present?
+      @customer.build_email unless @customer.email.present?
     end
 
     # Only allow a list of trusted parameters through.
@@ -77,12 +78,24 @@ class CustomersController < ApplicationController
           :last_name,
           :skip_unique_name_validation,
           :customer_type,
-          address_attributes: [
-            :street, :street2, :city, :state, :zip, :country
-          ],
-          cellphone_attributes: [
-            :number
-          ]
+          address_attributes: address_params,
+          billing_address_attributes: address_params,
+          cellphone_attributes: telephone_params,
+          homephone_attributes: telephone_params,
+          email_attributes: email_address_params,
+          secondary_email: email_address_params
         ])
+    end
+
+    def address_params
+      [ :street, :street2, :city, :state, :zip, :country, :_destroy  ]
+    end
+
+    def telephone_params
+      [ :number, :_destroy ]
+    end
+
+    def email_address_params
+      [ :address, :_destroy ]
     end
 end

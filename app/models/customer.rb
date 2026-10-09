@@ -1,11 +1,14 @@
 class Customer < ApplicationRecord
   attr_accessor :skip_unique_name_validation
 
-  has_one :address, -> { primary }, as: :addressable
-  has_one :billing_address, -> { billing }, class_name: "Address", as: :addressable
+  has_one :address, -> { primary }, as: :addressable, dependent: :destroy
+  has_one :billing_address, -> { billing }, class_name: "Address", as: :addressable, dependent: :destroy
 
-  has_one :cellphone, -> { cellphone }, class_name: "Telephone", as: :reachable
-  has_one :homephone, -> { home }, class_name: "Telephone", as: :reachable
+  has_one :cellphone, -> { cellphone }, class_name: "Telephone", as: :reachable, dependent: :destroy
+  has_one :homephone, -> { home }, class_name: "Telephone", as: :reachable, dependent: :destroy
+
+  has_one :email, -> { primary }, class_name: "EmailAddress", as: :emailable, dependent: :destroy
+  has_one :secondary_email, -> { secondary }, class_name: "EmailAddress", as: :emailable, dependent: :destroy
 
   validates :last_name, presence: true
   validates :first_name,
@@ -15,7 +18,8 @@ class Customer < ApplicationRecord
 
   enum :customer_type, %w[ customer lead ].index_by(&:itself), default: :customer
 
-  accepts_nested_attributes_for :address, :cellphone, reject_if: :all_blank
+  accepts_nested_attributes_for :address, :billing_address, :cellphone, :homephone, :email, :secondary_email,
+                                reject_if: :all_blank, allow_destroy: true
 
   def name
     [ first_name, last_name ].compact.reject(&:empty?).join(" ")
