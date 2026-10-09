@@ -5,6 +5,7 @@ module Identifiable
     has_one :identity, as: :userable, dependent: :destroy, autosave: true
 
     has_many :magic_links, through: :identity
+    has_many :access_tokens, through: :identity
 
     after_initialize :build_default_identity, if: :new_record?
   end

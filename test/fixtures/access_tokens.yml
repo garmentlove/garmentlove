@@ -1,0 +1,20 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+read:
+  token: READ
+  identity: one 
+  description: Read 📖 
+
+write:
+  token: WRITE
+  identity: one
+  permission: write
+  description: Write ✍️
+
+one: 
+  token: bb9bef4bf2cdceaee06bb59d8a4fb4a3
+  identity: two
+
+two: 
+  token: 1d1a0bec58232f58f6fa9c48fae47f2d
+  identity: two

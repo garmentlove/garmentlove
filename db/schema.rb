@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2026_10_09_191025) do
+ActiveRecord::Schema[8.2].define(version: 2026_10_09_193943) do
+  create_table "access_tokens", force: :cascade do |t|
+    t.integer "identity_id", null: false
+    t.string "token"
+    t.string "permission"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["identity_id"], name: "index_access_tokens_on_identity_id"
+  end
+
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -112,6 +122,7 @@ ActiveRecord::Schema[8.2].define(version: 2026_10_09_191025) do
     t.index ["reachable_type", "reachable_id"], name: "index_telephones_on_reachable"
   end
 
+  add_foreign_key "access_tokens", "identities"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "magic_links", "identities"
