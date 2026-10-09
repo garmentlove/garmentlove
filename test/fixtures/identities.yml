@@ -5,3 +5,9 @@ one:
 
 two:
   userable: two (Customer)
+
+three:
+  userable: one (User)
+  
+four: 
+  userable: two (User)

@@ -10,3 +10,11 @@ three:
   address: test3@example.com
   emailable: two (Customer)
   designation: secondary
+
+four:
+  address: one@example.com
+  emailable: one (User)
+
+five:
+  address: two@example.com
+  emailable: two (User)
