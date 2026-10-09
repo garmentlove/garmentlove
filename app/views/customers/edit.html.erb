@@ -1,10 +1,18 @@
-<% content_for :title, "Editing customer" %>
+<% content_for :title, "Edit #{@customer.name}" %>
 
-<div class="md:w-2/3 w-full">
-  <h1 class="font-bold text-4xl">Editing customer</h1>
+<section class="mx-auto max-w-3xl space-y-7">
+  <%= link_to customer_path(@customer), class: "inline-flex items-center gap-2 text-sm text-slate-400 transition-colors hover:text-[#7dd3fc]" do %>
+    <span aria-hidden="true">←</span>
+    Customer account
+  <% end %>
 
-  <%= render "form", customer: @customer %>
+  <div>
+    <p class="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-[#7dd3fc]">Customer directory / Edit</p>
+    <h1 class="text-3xl font-semibold tracking-wide text-white">Edit customer</h1>
+    <p class="mt-2 text-sm text-slate-400">Update the account and contact information for <%= @customer.name %>.</p>
+  </div>
 
-  <%= link_to "Show this customer", @customer, class: "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-  <%= link_to "Back to customers", customers_path, class: "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-</div>
+  <div class="rounded-2xl border border-sky-300/10 bg-[rgba(15,21,36,0.6)] p-5 backdrop-blur-lg sm:p-8">
+    <%= render "form", customer: @customer %>
+  </div>
+</section>

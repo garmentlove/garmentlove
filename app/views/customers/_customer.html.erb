@@ -1,10 +1,9 @@
-<div id="<%= dom_id customer %>" class="w-full sm:w-auto my-5 space-y-5">
-  <div>
-    <strong class="block font-medium mb-1">First name:</strong>
-    <%= customer.first_name %>
+<div id="<%= dom_id customer %>" class="flex min-w-0 items-center gap-4">
+  <div class="flex size-11 shrink-0 items-center justify-center rounded-full border border-sky-300/15 bg-sky-300/10 text-sm font-semibold tracking-wide text-[#7dd3fc]">
+    <%= customer.initials %>
   </div>
-  <div>
-    <strong class="block font-medium mb-1">Last name:</strong>
-    <%= customer.last_name %>
+  <div class="min-w-0">
+    <h2 class="truncate font-semibold text-white"><%= customer.name.presence || "Unnamed customer" %></h2>
+    <p class="mt-1 text-xs text-slate-500">Customer since <%= customer.created_at.strftime("%b %Y") %></p>
   </div>
 </div>

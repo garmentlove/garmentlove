@@ -2,28 +2,30 @@
   <%= address_form.hidden_field :id %> 
   <%= address_form.hidden_field :_destroy %>
 
-  <div class="my-5">
-    <%= address_form.label :street %>
-    <%= address_form.text_field :street, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": model.errors[:street].blank?, "border-red-400 focus:outline-red-600": model.errors[:street].present?}] %>
-  </div>
-  <div class="my-5">
-    <%= address_form.label :street2 %>
-    <%= address_form.text_field :street2, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": model.errors[:street2].blank?, "border-red-400 focus:outline-red-600": model.errors[:street2].present?}] %>
-  </div>
-  <div class="my-5">
-    <%= address_form.label :city %>
-    <%= address_form.text_field :city, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": model.errors[:city].blank?, "border-red-400 focus:outline-red-600": model.errors[:city].present?}] %>
-  </div>
-  <div class="my-5">
-    <%= address_form.label :state %>
-    <%= address_form.text_field :state, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": model.errors[:state].blank?, "border-red-400 focus:outline-red-600": model.errors[:state].present?}] %>
-  </div>
-  <div class="my-5">
-    <%= address_form.label :zip %>
-    <%= address_form.text_field :zip, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": model.errors[:zip].blank?, "border-red-400 focus:outline-red-600": model.errors[:zip].present?}] %>
-  </div>
-  <div class="my-5">
-    <%= address_form.label :country %>
-    <%= address_form.text_field :country, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": model.errors[:country].blank?, "border-red-400 focus:outline-red-600": model.errors[:country].present?}] %>
+  <div class="grid gap-5 sm:grid-cols-2">
+    <div class="sm:col-span-2">
+      <%= address_form.label :street, class: "text-sm font-medium text-slate-300" %>
+      <%= address_form.text_field :street, autocomplete: "address-line1", class: ["mt-2 block w-full rounded-xl border bg-[rgba(10,14,26,0.55)] px-3.5 py-3 text-sm text-white placeholder:text-slate-500 focus:border-sky-300/30 focus:shadow-[0_0_30px_rgba(125,211,252,0.05)] focus:outline-none", model.errors[:street].present? ? "border-rose-300/40" : "border-white/10"] %>
+    </div>
+    <div class="sm:col-span-2">
+      <%= address_form.label :street2, class: "text-sm font-medium text-slate-300" %>
+      <%= address_form.text_field :street2, autocomplete: "address-line2", class: ["mt-2 block w-full rounded-xl border bg-[rgba(10,14,26,0.55)] px-3.5 py-3 text-sm text-white placeholder:text-slate-500 focus:border-sky-300/30 focus:shadow-[0_0_30px_rgba(125,211,252,0.05)] focus:outline-none", model.errors[:street2].present? ? "border-rose-300/40" : "border-white/10"] %>
+    </div>
+    <div>
+      <%= address_form.label :city, class: "text-sm font-medium text-slate-300" %>
+      <%= address_form.text_field :city, autocomplete: "address-level2", class: ["mt-2 block w-full rounded-xl border bg-[rgba(10,14,26,0.55)] px-3.5 py-3 text-sm text-white placeholder:text-slate-500 focus:border-sky-300/30 focus:shadow-[0_0_30px_rgba(125,211,252,0.05)] focus:outline-none", model.errors[:city].present? ? "border-rose-300/40" : "border-white/10"] %>
+    </div>
+    <div>
+      <%= address_form.label :state, class: "text-sm font-medium text-slate-300" %>
+      <%= address_form.text_field :state, autocomplete: "address-level1", class: ["mt-2 block w-full rounded-xl border bg-[rgba(10,14,26,0.55)] px-3.5 py-3 text-sm text-white placeholder:text-slate-500 focus:border-sky-300/30 focus:shadow-[0_0_30px_rgba(125,211,252,0.05)] focus:outline-none", model.errors[:state].present? ? "border-rose-300/40" : "border-white/10"] %>
+    </div>
+    <div>
+      <%= address_form.label :zip, class: "text-sm font-medium text-slate-300" %>
+      <%= address_form.text_field :zip, autocomplete: "postal-code", class: ["mt-2 block w-full rounded-xl border bg-[rgba(10,14,26,0.55)] px-3.5 py-3 text-sm text-white placeholder:text-slate-500 focus:border-sky-300/30 focus:shadow-[0_0_30px_rgba(125,211,252,0.05)] focus:outline-none", model.errors[:zip].present? ? "border-rose-300/40" : "border-white/10"] %>
+    </div>
+    <div>
+      <%= address_form.label :country, class: "text-sm font-medium text-slate-300" %>
+      <%= address_form.text_field :country, autocomplete: "country-name", class: ["mt-2 block w-full rounded-xl border bg-[rgba(10,14,26,0.55)] px-3.5 py-3 text-sm text-white placeholder:text-slate-500 focus:border-sky-300/30 focus:shadow-[0_0_30px_rgba(125,211,252,0.05)] focus:outline-none", model.errors[:country].present? ? "border-rose-300/40" : "border-white/10"] %>
+    </div>
   </div>
 <% end %>

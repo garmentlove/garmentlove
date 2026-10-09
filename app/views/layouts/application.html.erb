@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="h-full">
   <head>
     <title><%= content_for(:title) || "Garmentlove" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -23,9 +23,28 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
-      <%= yield %>
-    </main>
+  <body class="min-h-full bg-[#0a0e1a] font-[Inter] text-slate-100 antialiased">
+    <div class="min-h-screen bg-[radial-gradient(ellipse_at_top,_rgba(125,211,252,0.08),_transparent_45%)]">
+      <header class="border-b border-sky-300/10 bg-[rgba(10,14,26,0.72)] backdrop-blur-xl">
+        <div class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 py-4 sm:px-8">
+          <%= link_to customers_path, class: "flex items-center gap-3" do %>
+            <span class="flex size-10 items-center justify-center rounded-xl border border-sky-300/15 bg-sky-300/10 text-sm font-semibold tracking-wide text-[#7dd3fc]">GL</span>
+            <span>
+              <span class="block text-sm font-semibold tracking-wide text-white">GarmentLove</span>
+              <span class="block text-xs text-slate-400">Customer workspace</span>
+            </span>
+          <% end %>
+
+          <nav aria-label="Main navigation" class="flex items-center gap-2">
+            <%= link_to "Customers", customers_path, class: "rounded-lg border border-sky-300/15 bg-sky-300/10 px-3.5 py-2 text-sm font-medium text-[#7dd3fc] transition-colors hover:bg-sky-300/20" %>
+            <%= link_to "Add customer", new_customer_path, class: "hidden rounded-lg px-3.5 py-2 text-sm font-medium text-slate-300 transition-colors hover:bg-white/5 hover:text-white sm:inline-flex" %>
+          </nav>
+        </div>
+      </header>
+
+      <main class="mx-auto w-full max-w-7xl px-5 py-10 sm:px-8 sm:py-14">
+        <%= yield %>
+      </main>
+    </div>
   </body>
 </html>

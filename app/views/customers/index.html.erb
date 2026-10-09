@@ -1,29 +1,76 @@
-<% content_for :title, "Customers" %>
+<% content_for :title, "Customer directory" %>
 
-<div class="w-full">
+<section class="space-y-8">
   <% if notice.present? %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
+    <p class="inline-flex rounded-xl border border-emerald-300/15 bg-emerald-300/10 px-4 py-3 text-sm font-medium text-emerald-200" id="notice"><%= notice %></p>
   <% end %>
 
-  <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Customers</h1>
-    <%= link_to "New customer", new_customer_path, class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white block font-medium" %>
-  </div>
-
-  <div id="customers" class="min-w-full divide-y divide-gray-200 space-y-5">
-    <% if @customers.any? %>
-      <% @customers.each do |customer| %>
-        <div class="flex flex-col sm:flex-row justify-between items-center pb-5 sm:pb-0">
-          <%= render customer %>
-          <div class="w-full sm:w-auto flex flex-col sm:flex-row space-x-2 space-y-2">
-            <%= link_to "Show", customer, class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-            <%= link_to "Edit", edit_customer_path(customer), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-            <%= button_to "Destroy", customer, method: :delete, class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
-          </div>
-        </div>
-      <% end %>
-    <% else %>
-      <p class="text-center my-10">No customers found.</p>
+  <div class="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
+    <div>
+      <p class="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-[#7dd3fc]">Workspace / Directory</p>
+      <h1 class="text-3xl font-semibold tracking-wide text-white sm:text-4xl">Customers</h1>
+      <p class="mt-2 text-sm text-slate-400">A clear view of the people behind every great fit.</p>
+    </div>
+    <%= link_to new_customer_path, class: "inline-flex items-center justify-center gap-2 self-start rounded-xl border border-sky-300/15 bg-sky-300/10 px-4 py-3 text-sm font-semibold text-[#7dd3fc] transition-colors hover:bg-sky-300/20 sm:self-auto" do %>
+      <span aria-hidden="true" class="text-lg leading-none">+</span>
+      New customer
     <% end %>
   </div>
-</div>
+
+  <div class="flex flex-wrap items-center gap-3">
+    <div class="rounded-xl border border-sky-300/10 bg-[rgba(15,21,36,0.6)] px-4 py-3 backdrop-blur-lg">
+      <p class="text-xs text-slate-400">Total customers</p>
+      <p class="mt-1 text-lg font-semibold text-white"><%= @customers.size %></p>
+    </div>
+    <div class="rounded-xl border border-sky-300/10 bg-[rgba(15,21,36,0.6)] px-4 py-3 backdrop-blur-lg">
+      <p class="text-xs text-slate-400">Leads</p>
+      <p class="mt-1 text-lg font-semibold text-[#7dd3fc]"><%= @customers.count(&:lead?) %></p>
+    </div>
+  </div>
+
+  <div id="customers" class="overflow-hidden rounded-2xl border border-sky-300/10 bg-[rgba(15,21,36,0.6)] backdrop-blur-lg">
+    <% if @customers.any? %>
+      <div class="hidden grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)_minmax(0,0.7fr)_auto] gap-6 border-b border-white/10 px-6 py-4 text-xs font-medium uppercase tracking-wider text-slate-500 lg:grid">
+        <span>Customer</span>
+        <span>Contact</span>
+        <span>Type</span>
+        <span class="text-right">Actions</span>
+      </div>
+      <div class="divide-y divide-white/10">
+        <% @customers.each do |customer| %>
+          <article class="grid gap-4 px-5 py-5 transition-colors hover:bg-white/[0.025] sm:px-6 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)_minmax(0,0.7fr)_auto] lg:items-center lg:gap-6">
+            <%= render customer %>
+
+            <div class="min-w-0 space-y-1.5 text-sm">
+              <% if customer.email&.address.present? %>
+                <p class="truncate text-slate-200"><%= customer.email.address %></p>
+              <% else %>
+                <p class="text-slate-500">No email on file</p>
+              <% end %>
+              <% if customer.cellphone&.number.present? %>
+                <p class="text-slate-400"><%= customer.cellphone.number %></p>
+              <% end %>
+            </div>
+
+            <div>
+              <span class="inline-flex rounded-full border border-sky-300/15 bg-sky-300/10 px-3 py-1 text-xs font-medium capitalize text-[#7dd3fc]"><%= customer.customer_type %></span>
+            </div>
+
+            <div class="flex flex-wrap gap-2 lg:justify-end">
+              <%= link_to "View", customer, class: "rounded-lg border border-white/10 px-3 py-2 text-xs font-medium text-slate-300 transition-colors hover:border-sky-300/20 hover:bg-sky-300/10 hover:text-[#7dd3fc]" %>
+              <%= link_to "Edit", edit_customer_path(customer), class: "rounded-lg border border-white/10 px-3 py-2 text-xs font-medium text-slate-300 transition-colors hover:border-sky-300/20 hover:bg-sky-300/10 hover:text-[#7dd3fc]" %>
+              <%= button_to "Delete", customer, method: :delete, class: "rounded-lg border border-rose-300/10 px-3 py-2 text-xs font-medium text-rose-200 transition-colors hover:border-rose-300/20 hover:bg-rose-300/10", data: { turbo_confirm: "Are you sure?" } %>
+            </div>
+          </article>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="px-6 py-16 text-center">
+        <div class="mx-auto flex size-14 items-center justify-center rounded-2xl border border-sky-300/15 bg-sky-300/10 text-xl text-[#7dd3fc]" aria-hidden="true">GL</div>
+        <h2 class="mt-5 text-lg font-semibold text-white">Your directory is ready</h2>
+        <p class="mx-auto mt-2 max-w-sm text-sm text-slate-400">Add your first customer to keep their contact details and account information close at hand.</p>
+        <%= link_to "Add your first customer", new_customer_path, class: "mt-6 inline-flex rounded-xl border border-sky-300/15 bg-sky-300/10 px-4 py-2.5 text-sm font-semibold text-[#7dd3fc] transition-colors hover:bg-sky-300/20" %>
+      </div>
+    <% end %>
+  </div>
+</section>
