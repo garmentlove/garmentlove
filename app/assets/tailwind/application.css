@@ -289,10 +289,10 @@
   .gl-button-secondary,
   .gl-button-danger,
   .gl-button-quiet {
+    @apply rounded-full;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: 0.75rem;
     font-size: 0.875rem;
     font-weight: 600;
     transition: background-color 150ms, border-color 150ms, color 150ms;
@@ -510,9 +510,9 @@
   }
 
   .gl-action-link {
+    @apply rounded-full;
     display: inline-flex;
     border: 1px solid var(--gl-border-soft);
-    border-radius: 0.5rem;
     padding: 0.5rem 0.75rem;
     color: var(--gl-text-secondary);
     font-size: 0.75rem;
@@ -660,10 +660,10 @@
   }
 
   .gl-submit {
+    @apply rounded-full;
     width: 100%;
     cursor: pointer;
     border: 1px solid var(--gl-accent-border);
-    border-radius: 0.75rem;
     background: var(--gl-accent-bg);
     padding: 0.75rem 1.25rem;
     color: var(--gl-accent);
