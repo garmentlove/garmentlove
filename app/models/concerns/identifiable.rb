@@ -4,6 +4,8 @@ module Identifiable
   included do
     has_one :identity, as: :userable, dependent: :destroy, autosave: true
 
+    has_many :magic_links, through: :identity
+
     after_initialize :build_default_identity, if: :new_record?
   end
 
