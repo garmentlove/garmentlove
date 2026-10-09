@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2026_10_09_193943) do
+ActiveRecord::Schema[8.2].define(version: 2026_10_09_195443) do
   create_table "access_tokens", force: :cascade do |t|
     t.integer "identity_id", null: false
     t.string "token"
@@ -111,6 +111,15 @@ ActiveRecord::Schema[8.2].define(version: 2026_10_09_193943) do
     t.index ["identity_id"], name: "index_magic_links_on_identity_id"
   end
 
+  create_table "sessions", force: :cascade do |t|
+    t.integer "identity_id", null: false
+    t.string "ip_address"
+    t.string "user_agent"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["identity_id"], name: "index_sessions_on_identity_id"
+  end
+
   create_table "telephones", force: :cascade do |t|
     t.integer "designation", default: 0, null: false
     t.string "number", null: false
@@ -126,4 +135,5 @@ ActiveRecord::Schema[8.2].define(version: 2026_10_09_193943) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "magic_links", "identities"
+  add_foreign_key "sessions", "identities"
 end

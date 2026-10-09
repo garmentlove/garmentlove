@@ -4,6 +4,7 @@ module Identifiable
   included do
     has_one :identity, as: :userable, dependent: :destroy, autosave: true
 
+    has_many :sessions, through: :identity
     has_many :magic_links, through: :identity
     has_many :access_tokens, through: :identity
 
