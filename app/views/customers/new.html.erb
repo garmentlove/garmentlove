@@ -1,18 +1,18 @@
 <% content_for :title, "New customer" %>
 
-<section class="mx-auto max-w-3xl space-y-7">
-  <%= link_to customers_path, class: "inline-flex items-center gap-2 text-sm text-slate-400 transition-colors hover:text-[#7dd3fc]" do %>
+<section class="gl-page gl-page-narrow">
+  <%= link_to customers_path, class: "gl-link-back" do %>
     <span aria-hidden="true">←</span>
     Customer directory
   <% end %>
 
   <div>
-    <p class="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-[#7dd3fc]">Customer directory / New</p>
-    <h1 class="text-3xl font-semibold tracking-wide text-white">Add a customer</h1>
-    <p class="mt-2 text-sm text-slate-400">Create an account and save their contact details.</p>
+    <p class="gl-eyebrow">Customer directory / New</p>
+    <h1 class="gl-title">Add a customer</h1>
+    <p class="gl-subtitle">Create an account and save their contact details.</p>
   </div>
 
-  <div class="rounded-2xl border border-sky-300/10 bg-[rgba(15,21,36,0.6)] p-5 backdrop-blur-lg sm:p-8">
+  <div class="gl-form-card">
     <%= render "form", customer: @customer %>
   </div>
 </section>

@@ -1,9 +1,9 @@
-<div id="<%= dom_id customer %>" class="flex min-w-0 items-center gap-4">
-  <div class="flex size-11 shrink-0 items-center justify-center rounded-full border border-sky-300/15 bg-sky-300/10 text-sm font-semibold tracking-wide text-[#7dd3fc]">
+<div id="<%= dom_id customer %>" class="gl-customer-identity">
+  <div class="gl-avatar">
     <%= customer.initials %>
   </div>
-  <div class="min-w-0">
-    <h2 class="truncate font-semibold text-white"><%= customer.name.presence || "Unnamed customer" %></h2>
-    <p class="mt-1 text-xs text-slate-500">Customer since <%= customer.created_at.strftime("%b %Y") %></p>
+  <div class="gl-identity-copy">
+    <h2 class="gl-customer-name"><%= customer.name.presence || "Unnamed customer" %></h2>
+    <p class="gl-caption">Customer since <%= customer.created_at.strftime("%b %Y") %></p>
   </div>
 </div>

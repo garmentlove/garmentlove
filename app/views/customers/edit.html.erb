@@ -1,18 +1,18 @@
 <% content_for :title, "Edit #{@customer.name}" %>
 
-<section class="mx-auto max-w-3xl space-y-7">
-  <%= link_to customer_path(@customer), class: "inline-flex items-center gap-2 text-sm text-slate-400 transition-colors hover:text-[#7dd3fc]" do %>
+<section class="gl-page gl-page-narrow">
+  <%= link_to customer_path(@customer), class: "gl-link-back" do %>
     <span aria-hidden="true">←</span>
     Customer account
   <% end %>
 
   <div>
-    <p class="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-[#7dd3fc]">Customer directory / Edit</p>
-    <h1 class="text-3xl font-semibold tracking-wide text-white">Edit customer</h1>
-    <p class="mt-2 text-sm text-slate-400">Update the account and contact information for <%= @customer.name %>.</p>
+    <p class="gl-eyebrow">Customer directory / Edit</p>
+    <h1 class="gl-title">Edit customer</h1>
+    <p class="gl-subtitle">Update the account and contact information for <%= @customer.name %>.</p>
   </div>
 
-  <div class="rounded-2xl border border-sky-300/10 bg-[rgba(15,21,36,0.6)] p-5 backdrop-blur-lg sm:p-8">
+  <div class="gl-form-card">
     <%= render "form", customer: @customer %>
   </div>
 </section>

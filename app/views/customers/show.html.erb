@@ -1,73 +1,73 @@
 <% content_for :title, @customer.name.presence || "Customer account" %>
 
-<section class="mx-auto max-w-5xl space-y-7">
+<section class="gl-page gl-page-wide">
   <% if notice.present? %>
-    <p class="inline-flex rounded-xl border border-emerald-300/15 bg-emerald-300/10 px-4 py-3 text-sm font-medium text-emerald-200" id="notice"><%= notice %></p>
+    <p class="gl-notice" id="notice"><%= notice %></p>
   <% end %>
 
-  <div class="flex flex-wrap items-center justify-between gap-4">
-    <%= link_to customers_path, class: "inline-flex items-center gap-2 text-sm text-slate-400 transition-colors hover:text-[#7dd3fc]" do %>
+  <div class="gl-page-heading">
+    <%= link_to customers_path, class: "gl-link-back" do %>
       <span aria-hidden="true">←</span>
       Customer directory
     <% end %>
-    <div class="flex flex-wrap gap-2">
-      <%= link_to "Edit account", edit_customer_path(@customer), class: "rounded-xl border border-sky-300/15 bg-sky-300/10 px-4 py-2.5 text-sm font-semibold text-[#7dd3fc] transition-colors hover:bg-sky-300/20" %>
-      <%= button_to "Delete", @customer, method: :delete, class: "rounded-xl border border-rose-300/10 px-4 py-2.5 text-sm font-medium text-rose-200 transition-colors hover:border-rose-300/20 hover:bg-rose-300/10", data: { turbo_confirm: "Are you sure?" } %>
+    <div class="gl-action-bar">
+      <%= link_to "Edit account", edit_customer_path(@customer), class: "gl-button-secondary" %>
+      <%= button_to "Delete", @customer, method: :delete, form_class: "gl-destructive-form", class: "gl-button-danger", data: { turbo_confirm: "Are you sure?" } %>
     </div>
   </div>
 
-  <div class="overflow-hidden rounded-2xl border border-sky-300/10 bg-[rgba(15,21,36,0.75)] backdrop-blur-xl">
-    <div class="relative overflow-hidden border-b border-white/10 px-6 py-8 sm:px-9 sm:py-10">
-      <div class="absolute -right-14 -top-24 size-64 rounded-full bg-sky-300/5 blur-3xl" aria-hidden="true"></div>
-      <div class="relative flex flex-col gap-5 sm:flex-row sm:items-center">
-        <div class="flex size-16 shrink-0 items-center justify-center rounded-2xl border border-sky-300/15 bg-sky-300/10 text-xl font-semibold tracking-wide text-[#7dd3fc]"><%= @customer.initials %></div>
-        <div class="min-w-0">
-          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#7dd3fc]">Customer account</p>
-          <h1 class="mt-2 truncate text-3xl font-semibold tracking-wide text-white"><%= @customer.name.presence || "Unnamed customer" %></h1>
-          <div class="mt-3 flex flex-wrap items-center gap-3 text-sm text-slate-400">
-            <span class="rounded-full border border-sky-300/15 bg-sky-300/10 px-3 py-1 text-xs font-medium capitalize text-[#7dd3fc]"><%= @customer.customer_type %></span>
+  <div class="gl-account-card">
+    <div class="gl-account-hero">
+      <div class="gl-account-glow" aria-hidden="true"></div>
+      <div class="gl-account-identity">
+        <div class="gl-avatar gl-avatar-large"><%= @customer.initials %></div>
+        <div class="gl-identity-copy">
+          <p class="gl-eyebrow">Customer account</p>
+          <h1 class="gl-account-title"><%= @customer.name.presence || "Unnamed customer" %></h1>
+          <div class="gl-account-meta">
+            <span class="gl-badge"><%= @customer.customer_type %></span>
             <span>Added <%= @customer.created_at.strftime("%B %-d, %Y") %></span>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="grid gap-5 p-5 sm:grid-cols-2 sm:p-8">
-      <section class="rounded-xl border border-white/10 bg-[rgba(10,14,26,0.4)] p-5">
-        <h2 class="text-sm font-semibold tracking-wide text-white">Contact details</h2>
-        <dl class="mt-5 space-y-4">
+    <div class="gl-account-grid">
+      <section class="gl-detail-card">
+        <h2 class="gl-detail-title">Contact details</h2>
+        <dl class="gl-detail-list">
           <div>
-            <dt class="text-xs text-slate-500">Email</dt>
-            <dd class="mt-1 break-all text-sm text-slate-200"><%= @customer.email&.address.presence || "Not provided" %></dd>
+            <dt class="gl-detail-label">Email</dt>
+            <dd class="gl-detail-value gl-detail-value-break"><%= @customer.email&.address.presence || "Not provided" %></dd>
           </div>
           <div>
-            <dt class="text-xs text-slate-500">Mobile phone</dt>
-            <dd class="mt-1 text-sm text-slate-200"><%= @customer.cellphone&.number.presence || "Not provided" %></dd>
+            <dt class="gl-detail-label">Mobile phone</dt>
+            <dd class="gl-detail-value"><%= @customer.cellphone&.number.presence || "Not provided" %></dd>
           </div>
           <div>
-            <dt class="text-xs text-slate-500">Home phone</dt>
-            <dd class="mt-1 text-sm text-slate-200"><%= @customer.homephone&.number.presence || "Not provided" %></dd>
+            <dt class="gl-detail-label">Home phone</dt>
+            <dd class="gl-detail-value"><%= @customer.homephone&.number.presence || "Not provided" %></dd>
           </div>
           <% if @customer.secondary_email&.address.present? %>
             <div>
-              <dt class="text-xs text-slate-500">Alternate email</dt>
-              <dd class="mt-1 break-all text-sm text-slate-200"><%= @customer.secondary_email.address %></dd>
+              <dt class="gl-detail-label">Alternate email</dt>
+              <dd class="gl-detail-value gl-detail-value-break"><%= @customer.secondary_email.address %></dd>
             </div>
           <% end %>
         </dl>
       </section>
 
-      <section class="rounded-xl border border-white/10 bg-[rgba(10,14,26,0.4)] p-5">
-        <h2 class="text-sm font-semibold tracking-wide text-white">Address</h2>
-        <dl class="mt-5 space-y-4">
+      <section class="gl-detail-card">
+        <h2 class="gl-detail-title">Address</h2>
+        <dl class="gl-detail-list">
           <div>
-            <dt class="text-xs text-slate-500">Mailing address</dt>
-            <dd class="mt-1 whitespace-pre-line text-sm leading-6 text-slate-200"><%= @customer.address&.mailing.presence || "No address on file" %></dd>
+            <dt class="gl-detail-label">Mailing address</dt>
+            <dd class="gl-detail-value gl-detail-value-address"><%= @customer.address&.mailing.presence || "No address on file" %></dd>
           </div>
           <% if @customer.billing_address.present? && @customer.billing_address != @customer.address %>
             <div>
-              <dt class="text-xs text-slate-500">Billing address</dt>
-              <dd class="mt-1 whitespace-pre-line text-sm leading-6 text-slate-200"><%= @customer.billing_address.mailing %></dd>
+              <dt class="gl-detail-label">Billing address</dt>
+              <dd class="gl-detail-value gl-detail-value-address"><%= @customer.billing_address.mailing %></dd>
             </div>
           <% end %>
         </dl>
