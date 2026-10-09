@@ -4,6 +4,9 @@ class Identity < ApplicationRecord
   belongs_to :customer, foreign_key: :userable_id, class_name: "Customer", optional: true
   belongs_to :user, foreign_key: :userable_id, class_name: "User", optional: true
 
+  scope :customers, -> { where(userable_type: "Customer") }
+  scope :users, -> { where(userable_type: "User") }
+
   has_many :sessions, dependent: :destroy
   has_many :magic_links, dependent: :destroy
   has_many :access_tokens, dependent: :destroy
@@ -24,5 +27,13 @@ class Identity < ApplicationRecord
     def find_by_username(username, with: :user)
       includes(:user).find_by(user: { username: username }) if with == :user
     end
+  end
+
+  def email
+    userable.email&.address
+  end
+
+  def cellphone
+    userable.cellphone&.number
   end
 end
