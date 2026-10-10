@@ -91,7 +91,6 @@
 
   .gl-header {
     border-bottom: 1px solid var(--gl-border);
-    background: var(--gl-header-bg);
     backdrop-filter: blur(24px);
   }
 
@@ -160,7 +159,6 @@
     margin-inline: auto;
     border: 1px solid var(--gl-border-soft);
     border-radius: 9999px;
-    background: var(--gl-dock-bg);
     padding: 0.25rem;
     box-shadow: 0 8px 28px var(--gl-dock-shadow);
     backdrop-filter: blur(24px);
