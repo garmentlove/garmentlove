@@ -2,6 +2,13 @@ require "test_helper"
 
 class CustomersControllerTest < ActionDispatch::IntegrationTest
   setup do
+    user = User.create!(
+      username: "test-user-#{SecureRandom.hex(6)}",
+      email: "test-user-#{SecureRandom.hex(6)}@example.com"
+    )
+    magic_link = user.identity.magic_links.create!(purpose: :sign_in)
+    post verify_session_path, params: { code: magic_link.code }
+
     @customer = customers(:one)
   end
 

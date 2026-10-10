@@ -27,14 +27,13 @@
     <div class="gl-background">
       <header class="gl-header">
         <div class="gl-header-inner">
-          <%= link_to customers_path, class: "gl-brand" do %>
-            <span class="gl-brand-mark">GL</span>
-            <span>
-              <span class="gl-brand-name">GarmentLove</span>
-              <span class="gl-brand-caption">Customer workspace</span>
-            </span>
-          <% end %>
+          <span class="gl-brand-mark">GL</span>
+          <span>
+            <span class="gl-brand-name">GarmentLove</span>
+            <span class="gl-brand-caption">Customer workspace</span>
+          </span>
 
+          <%= button_to "Sign out", session_path, method: :delete, class: "gl-button-quiet" %>
         </div>
       </header>
 

@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
+  resource :session do
+    scope module: :sessions do
+      resource :magic_link
+    end
+  end
+
   resources :customers
+  root "customers#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

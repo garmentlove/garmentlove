@@ -12,7 +12,7 @@ class Identity < ApplicationRecord
   has_many :access_tokens, dependent: :destroy
 
   class << self
-    def find_for_autentication(value, with: :user)
+    def find_for_authentication(value, with: :user)
       find_by_email(value, with: with) || find_by_cellphone(value, with: with) || find_by_username(value, with: with)
     end
 
@@ -26,6 +26,12 @@ class Identity < ApplicationRecord
 
     def find_by_username(username, with: :user)
       includes(:user).find_by(user: { username: username }) if with == :user
+    end
+
+    def find_by_permissable_access_token(token, method:)
+      if (access_token = AccessToken.find_by(token: token)) && access_token.allows?(method)
+        access_token.identity
+      end
     end
   end
 

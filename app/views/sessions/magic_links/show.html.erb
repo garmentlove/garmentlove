@@ -1,0 +1,10 @@
+<div class="gl-card">
+  <h2>Already have a code?</h2>
+  <%= form_with url: session_magic_link_path, class: "gl-form" do |form| %>
+    <div class="gl-form-field">
+      <%= form.label :code, "Six-character code", class: "gl-form-label" %>
+      <%= form.text_field :code, placeholder: "••••••", required: true, autocomplete: "one-time-code", inputmode: "text", maxlength: MagicLink::CODE_LENGTH, class: "gl-input text-3xl text-center uppercase" %>
+    </div>
+    <%= form.submit "Sign in", class: "gl-submit" %>
+  <% end %>
+</div>
