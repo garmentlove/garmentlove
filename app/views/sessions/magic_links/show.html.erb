@@ -1,10 +1,40 @@
-<div class="gl-card">
-  <h2>Already have a code?</h2>
-  <%= form_with url: session_magic_link_path, class: "gl-form" do |form| %>
-    <div class="gl-form-field">
-      <%= form.label :code, "Six-character code", class: "gl-form-label" %>
-      <%= form.text_field :code, placeholder: "••••••", required: true, autocomplete: "one-time-code", inputmode: "text", maxlength: MagicLink::CODE_LENGTH, class: "gl-input text-3xl text-center uppercase" %>
-    </div>
-    <%= form.submit "Sign in", class: "gl-submit" %>
+<section class="gl-auth-panel gl-code-panel">
+  <% if flash[:notice] %>
+    <p class="gl-auth-message gl-auth-message-notice" role="status"><%= flash[:notice] %></p>
   <% end %>
-</div>
+  <% if flash[:alert] %>
+    <p class="gl-auth-message gl-auth-message-alert" role="alert"><%= flash[:alert] %></p>
+  <% end %>
+
+  <div class="gl-auth-code-intro">
+    <h1>Enter Verification Code</h1>
+    <p>Enter the secure single-use token sent to your email address.</p>
+  </div>
+
+  <%= form_with url: session_magic_link_path, class: "gl-form gl-auth-form" do |form| %>
+    <div class="gl-form-field">
+      <div class="gl-auth-label-row">
+        <%= form.label :code, "Six-Character Token", class: "gl-form-label" %>
+        <span class="gl-auth-verification"><span class="gl-auth-status-dot" aria-hidden="true"></span> Ready to verify</span>
+      </div>
+      <%= form.text_field :code, placeholder: "••••••", required: true, autocomplete: "one-time-code", inputmode: "text", maxlength: MagicLink::CODE_LENGTH, class: "gl-input gl-auth-input gl-auth-code-input" %>
+    </div>
+    <%= form.submit "Verify & Enter →", class: "gl-submit gl-auth-submit" %>
+  <% end %>
+
+  <p class="gl-auth-alternative">Didn't receive a code? Check your sign-in message and try again.</p>
+
+  <div class="gl-auth-integrity">
+    <span class="gl-auth-integrity-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none">
+        <rect x="5" y="10" width="14" height="11" rx="2" />
+        <path d="M8 10V7a4 4 0 0 1 8 0v3m-4 4v3" />
+      </svg>
+    </span>
+    <span>
+      <strong>White-Glove Data Integrity</strong>
+      <small>Encrypted session <span aria-hidden="true">•</span> Cleanroom protocol</small>
+    </span>
+    <span class="gl-auth-integrity-check" aria-hidden="true">✓</span>
+  </div>
+</section>

@@ -130,6 +130,17 @@
     font-size: 0.875rem;
   }
 
+  .gl-auth-integrity-icon svg,
+  .gl-auth-alternative svg {
+    width: 1rem;
+    height: 1rem;
+    flex: 0 0 auto;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.8;
+  }
+
   .gl-brand-name {
     display: block;
     color: var(--gl-text-strong);
@@ -915,5 +926,578 @@
 
   .gl-actions {
     justify-content: flex-start;
+  }
+}
+
+@layer components {
+  .gl-auth-background {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    min-height: 100vh;
+    min-height: 100svh;
+    flex-direction: column;
+    overflow-x: hidden;
+    background:
+      radial-gradient(ellipse at 83% 74%, rgba(104, 213, 235, 0.17), transparent 36%),
+      radial-gradient(ellipse at 13% 24%, rgba(130, 203, 247, 0.15), transparent 36%),
+      linear-gradient(128deg, #f4f8fc 0%, #eef6fd 52%, #f5f9fd 100%);
+    color: #18253a;
+  }
+
+  .gl-auth-header,
+  .gl-auth-main,
+  .gl-auth-footer {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+  }
+
+  .gl-auth-header {
+    display: grid;
+    min-height: 4.25rem;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem clamp(1rem, 4vw, 2.5rem);
+  }
+
+  .gl-auth-dashboard,
+  .gl-auth-concierge,
+  .gl-auth-location {
+    display: inline-flex;
+    align-items: center;
+    color: #53657c;
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.075em;
+    line-height: 1.35;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .gl-auth-dashboard {
+    justify-self: start;
+    gap: 0.625rem;
+  }
+
+  .gl-auth-dashboard:hover {
+    color: #078ec4;
+  }
+
+  .gl-auth-back {
+    display: grid;
+    width: 1.875rem;
+    height: 1.875rem;
+    place-items: center;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.86);
+    box-shadow: 0 2px 8px rgba(55, 105, 145, 0.08);
+    font-size: 1rem;
+  }
+
+  .gl-auth-location {
+    justify-self: center;
+    gap: 0.4rem;
+    border: 1px solid rgba(139, 163, 189, 0.19);
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.72);
+    padding: 0.5rem 0.875rem;
+    box-shadow: 0 2px 10px rgba(55, 105, 145, 0.05);
+    white-space: nowrap;
+  }
+
+  .gl-auth-status-dot {
+    width: 0.375rem;
+    height: 0.375rem;
+    flex: 0 0 auto;
+    border-radius: 9999px;
+    background: #26b3e5;
+    box-shadow: 0 0 0.5rem rgba(38, 179, 229, 0.5);
+  }
+
+  .gl-auth-concierge {
+    justify-self: end;
+    gap: 0.5rem;
+  }
+
+  .gl-auth-concierge svg {
+    width: 0.9rem;
+    height: 0.9rem;
+    color: #159bd1;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.8;
+  }
+
+  .gl-auth-main {
+    display: grid;
+    flex: 1;
+    place-items: center;
+    padding: 2rem 1.25rem 1.25rem;
+  }
+
+  .gl-auth-panel {
+    position: relative;
+    width: min(100%, 28.25rem);
+    border: 1px solid rgba(130, 158, 187, 0.18);
+    border-radius: 1.5rem;
+    background: rgba(255, 255, 255, 0.82);
+    padding: clamp(1.5rem, 4vw, 2rem);
+    box-shadow:
+      0 20px 50px rgba(60, 105, 145, 0.08),
+      0 2px 8px rgba(60, 105, 145, 0.035);
+    backdrop-filter: blur(22px);
+  }
+
+  .gl-auth-panel::before {
+    position: absolute;
+    top: 0;
+    right: 1.5rem;
+    left: 1.5rem;
+    height: 2px;
+    border-radius: 0 0 9999px 9999px;
+    background: linear-gradient(90deg, transparent, #57c9f3, transparent);
+    content: "";
+  }
+
+  .gl-auth-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .gl-auth-brand-mark {
+    position: relative;
+    display: grid;
+    width: 3rem;
+    height: 3rem;
+    place-items: center;
+    margin-bottom: 0.75rem;
+    border: 1px solid rgba(71, 190, 235, 0.26);
+    border-radius: 1rem;
+    background: #fff;
+    box-shadow: 0 6px 20px rgba(59, 168, 218, 0.13);
+    color: #0896d0;
+  }
+
+  .gl-auth-brand-mark svg {
+    width: 1.75rem;
+    height: 1.75rem;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2.5;
+  }
+
+  .gl-auth-brand-mark > span {
+    position: absolute;
+    top: -0.3rem;
+    right: -0.35rem;
+    display: grid;
+    width: 1rem;
+    height: 1rem;
+    place-items: center;
+    border: 2px solid #fff;
+    border-radius: 9999px;
+    background: #0896d0;
+    color: #fff;
+    font-size: 0.5rem;
+  }
+
+  .gl-auth-brand-name {
+    color: #172338;
+    font-family: Manrope, Inter, ui-sans-serif, system-ui, sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.055em;
+    line-height: 1.15;
+  }
+
+  .gl-auth-brand-caption {
+    margin-top: 0.35rem;
+    color: #078dc3;
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  .gl-auth-brand-caption span {
+    padding-inline: 0.15rem;
+  }
+
+  .gl-auth-intro {
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .gl-auth-intro h1,
+  .gl-auth-intro h2,
+  .gl-auth-code-intro h1 {
+    color: #19263a;
+    font-family: Manrope, Inter, ui-sans-serif, system-ui, sans-serif;
+    font-size: 1.25rem;
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 1.25;
+  }
+
+  .gl-auth-intro p,
+  .gl-auth-code-intro p {
+    max-width: 25rem;
+    margin: 0.5rem auto 0;
+    color: #71839b;
+    font-size: 0.8125rem;
+    line-height: 1.55;
+  }
+
+  .gl-auth-form {
+    gap: 1.25rem;
+  }
+
+  .gl-auth-label-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .gl-auth-panel .gl-form-label {
+    color: #495a70;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .gl-auth-verification {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 0.375rem;
+    color: #098fc8;
+    font-size: 0.625rem;
+    font-weight: 700;
+  }
+
+  .gl-auth-verification .gl-auth-status-dot {
+    width: 0.3rem;
+    height: 0.3rem;
+  }
+
+  .gl-auth-panel .gl-auth-input {
+    min-height: 3rem;
+    margin-top: 0.55rem;
+    border: 1px solid rgba(135, 157, 183, 0.23);
+    border-radius: 0.9rem;
+    background: rgba(255, 255, 255, 0.92);
+    padding: 0.75rem 1rem;
+    color: #1e2c42;
+    font-size: 0.8125rem;
+    box-shadow: 0 2px 5px rgba(58, 92, 127, 0.025);
+  }
+
+  .gl-auth-panel .gl-auth-input::placeholder {
+    color: #9aa9bb;
+  }
+
+  .gl-auth-panel .gl-auth-input:focus {
+    border-color: rgba(19, 166, 218, 0.72);
+    box-shadow: 0 0 0 3px rgba(43, 183, 231, 0.12);
+  }
+
+  .gl-auth-panel .gl-auth-submit {
+    display: flex;
+    min-height: 3.25rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    border: 0;
+    background: linear-gradient(115deg, #69d3f5 0%, #14a6dc 100%);
+    padding: 0.8rem 1.25rem;
+    color: #fff;
+    font-size: 0.8125rem;
+    font-weight: 800;
+    box-shadow: 0 8px 20px rgba(10, 152, 207, 0.29);
+    transition: box-shadow 180ms, filter 180ms, transform 180ms;
+  }
+
+  .gl-auth-panel .gl-auth-submit:hover {
+    background: linear-gradient(115deg, #69d3f5 0%, #14a6dc 100%);
+    box-shadow: 0 10px 24px rgba(10, 152, 207, 0.35);
+    filter: saturate(1.08);
+    transform: translateY(-1px);
+  }
+
+  .gl-auth-alternative {
+    margin: 1.4rem 0;
+    color: #75869c;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  .gl-auth-alternative span {
+    margin-right: 0.25rem;
+    color: #119ed4;
+    font-size: 0.875rem;
+  }
+
+  .gl-auth-alternative svg {
+    margin-right: 0.25rem;
+    color: #119ed4;
+    vertical-align: middle;
+  }
+
+  .gl-auth-integrity {
+    display: flex;
+    min-height: 3.25rem;
+    align-items: center;
+    gap: 0.625rem;
+    border: 1px solid rgba(116, 197, 231, 0.18);
+    border-radius: 1rem;
+    background: rgba(241, 250, 255, 0.84);
+    padding: 0.6rem 0.75rem;
+  }
+
+  .gl-auth-integrity-icon {
+    display: grid;
+    width: 1.75rem;
+    height: 1.75rem;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid rgba(71, 190, 235, 0.22);
+    border-radius: 9999px;
+    background: #fff;
+    color: #078fca;
+    font-size: 0.875rem;
+  }
+
+  .gl-auth-integrity strong,
+  .gl-auth-integrity small {
+    display: block;
+  }
+
+  .gl-auth-integrity strong {
+    color: #37475b;
+    font-size: 0.625rem;
+    font-weight: 800;
+    letter-spacing: 0.035em;
+    text-transform: uppercase;
+  }
+
+  .gl-auth-integrity small {
+    margin-top: 0.2rem;
+    color: #7d90a7;
+    font-size: 0.5625rem;
+  }
+
+  .gl-auth-integrity-check {
+    margin-left: auto;
+    color: #078fca;
+    font-size: 0.875rem;
+    font-weight: 800;
+  }
+
+  .gl-auth-code-intro {
+    margin-bottom: 1.35rem;
+    text-align: center;
+  }
+
+  .gl-auth-code-intro h1 {
+    font-size: 1.25rem;
+  }
+
+  .gl-auth-code-heading {
+    margin-bottom: 1.35rem;
+  }
+
+  .gl-auth-code-heading h2 {
+    font-size: 1.2rem;
+  }
+
+  .gl-auth-code-input {
+    min-height: 3.5rem !important;
+    font-size: 1.4rem !important;
+    font-weight: 700;
+    letter-spacing: 0.55em;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .gl-auth-code-input::placeholder {
+    letter-spacing: 0.55em;
+  }
+
+  .gl-auth-message {
+    margin-bottom: 1rem;
+    border-radius: 0.75rem;
+    padding: 0.7rem 0.9rem;
+    font-size: 0.8125rem;
+    line-height: 1.45;
+  }
+
+  .gl-auth-message-notice {
+    background: rgba(20, 136, 99, 0.08);
+    color: #176849;
+  }
+
+  .gl-auth-message-alert {
+    background: rgba(190, 24, 60, 0.08);
+    color: #a83248;
+  }
+
+  .gl-auth-footer {
+    padding: 0.25rem 1rem 1.5rem;
+    color: #75869c;
+    font-size: 0.6875rem;
+    text-align: center;
+  }
+
+  .gl-auth-decorations {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .gl-auth-icon {
+    position: absolute;
+    width: clamp(1.65rem, 3.3vw, 2.5rem);
+    height: clamp(1.65rem, 3.3vw, 2.5rem);
+    color: #70bfdc;
+    opacity: 0.4;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 3;
+    animation: gl-auth-drift 7s ease-in-out infinite;
+  }
+
+  .gl-auth-icon-hanger {
+    top: 8%;
+    left: 7%;
+    animation-delay: -1s;
+  }
+
+  .gl-auth-icon-sparkle {
+    top: 11%;
+    left: 26%;
+    width: 2rem;
+    animation-delay: -4s;
+  }
+
+  .gl-auth-icon-tag {
+    top: 12%;
+    right: 25%;
+    width: 1.9rem;
+    animation-delay: -2s;
+  }
+
+  .gl-auth-icon-truck {
+    top: 22%;
+    right: 15%;
+    animation-delay: -5s;
+  }
+
+  .gl-auth-icon-washer {
+    top: 36%;
+    left: 5%;
+    animation-delay: -3s;
+  }
+
+  .gl-auth-icon-leaf {
+    top: 55%;
+    left: 20%;
+    width: 1.8rem;
+    animation-delay: -6s;
+  }
+
+  .gl-auth-icon-shield {
+    bottom: 27%;
+    left: 9%;
+    width: 2.6rem;
+    animation-delay: -2.5s;
+  }
+
+  .gl-auth-icon-drop {
+    right: 6%;
+    bottom: 27%;
+    animation-delay: -4.5s;
+  }
+
+  .gl-auth-icon-diamond {
+    right: 5%;
+    bottom: 12%;
+    animation-delay: -1.5s;
+  }
+
+  @keyframes gl-auth-drift {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) rotate(-4deg);
+    }
+
+    50% {
+      transform: translate3d(0, -10px, 0) rotate(4deg);
+    }
+  }
+}
+
+@media (max-width: 639px) {
+  .gl-auth-header {
+    min-height: 3.75rem;
+    grid-template-columns: 1fr auto;
+  }
+
+  .gl-auth-dashboard {
+    font-size: 0.55rem;
+  }
+
+  .gl-auth-dashboard .gl-auth-back {
+    width: 1.65rem;
+    height: 1.65rem;
+  }
+
+  .gl-auth-location {
+    display: none;
+  }
+
+  .gl-auth-concierge {
+    font-size: 0.55rem;
+  }
+
+  .gl-auth-main {
+    padding: 1rem 1rem 1.25rem;
+  }
+
+  .gl-auth-panel {
+    border-radius: 1.25rem;
+    padding: 1.5rem 1.25rem;
+  }
+
+  .gl-auth-footer {
+    padding-bottom: 1rem;
+  }
+
+  .gl-auth-icon-sparkle,
+  .gl-auth-icon-tag,
+  .gl-auth-icon-leaf {
+    opacity: 0.24;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gl-auth-icon {
+    animation: none;
+  }
+
+  .gl-auth-panel .gl-auth-submit {
+    transition: none;
   }
 }
