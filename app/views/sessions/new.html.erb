@@ -1,4 +1,4 @@
-<section class="gl-auth-panel gl-sign-in-panel">
+<section class="gl-auth-panel gl-sign-in-panel <%= flash[:alert] ? "animation-shake" : "" %>">
   <% if flash[:notice] %>
     <p class="gl-auth-message gl-auth-message-notice" role="status"><%= flash[:notice] %></p>
   <% end %>
