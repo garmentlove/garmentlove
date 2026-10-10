@@ -4,6 +4,8 @@ module Shippable
   included do
     has_one :address, -> { primary }, as: :addressable, dependent: :destroy
     has_one :billing_address, -> { billing }, class_name: "Address", as: :addressable, dependent: :destroy
+
+    accepts_nested_attributes_for :address, :billing_address, allow_destroy: true, reject_if: :all_blank
   end
 
   def billing_address

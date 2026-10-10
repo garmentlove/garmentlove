@@ -8,7 +8,8 @@ module Reachable
             as: :reachable, dependent: :destroy
 
     accepts_nested_attributes_for :cellphone, :homephone,
-                                  allow_destroy: true, reject_if: :all_blank
+                                  allow_destroy: true,
+                                  reject_if: ->(telephone) { telephone["number"].blank? }
   end
 
   def cellphone=(number)

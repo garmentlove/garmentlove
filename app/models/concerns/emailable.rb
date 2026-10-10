@@ -8,7 +8,8 @@ module Emailable
             as: :emailable, dependent: :destroy
 
     accepts_nested_attributes_for :email, :secondary_email,
-                                  allow_destroy: true, reject_if: :all_blank
+                                  allow_destroy: true,
+                                  reject_if: ->(email) { email["address"].blank? }
   end
 
   def email=(address)

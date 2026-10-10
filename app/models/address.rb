@@ -13,6 +13,6 @@ class Address < ApplicationRecord
   end
 
   def mailing
-    [ street, street2, city, state, zip, country ].compact.join(" ")
+    [ street, street2, city, state, zip, country ].compact.reject(&:empty?).join(" ")
   end
 end
