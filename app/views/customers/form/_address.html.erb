@@ -1,31 +1,57 @@
-<%= form.fields_for attribute do |address_form| %>
-  <%= address_form.hidden_field :id %> 
-  <%= address_form.hidden_field :_destroy %>
+<div data-controller="empty-destroy">
+  <%= form.fields_for attribute do |address_form| %>
+    <%= address_form.hidden_field :id %> 
+    <%= address_form.hidden_field :_destroy, data: { empty_destroy_target: "destroy" } %>
 
-  <div class="gl-form-grid gl-form-grid-two">
-    <div class="gl-form-field-wide">
-      <%= address_form.label :street, class: "gl-form-label" %>
-      <%= address_form.text_field :street, autocomplete: "address-line1", class: ["gl-input", model.errors[:street].present? ? "gl-input-error" : nil] %>
+    <div class="gl-form-grid gl-form-grid-two">
+      <div class="gl-form-field-wide">
+        <%= address_form.label :street, class: "gl-form-label" %>
+        <%= address_form.text_field :street, 
+                                    autocomplete: "address-line1", 
+                                    class: ["gl-input", model.errors[:street].present? ? "gl-input-error" : nil],
+                                    data: { action: "input->empty-destroy#update", 
+                                            empty_destroy_target: "inputs" } %>
+      </div>
+      <div class="gl-form-field-wide">
+        <%= address_form.label :street2, class: "gl-form-label" %>
+        <%= address_form.text_field :street2, 
+                                    autocomplete: "address-line2", 
+                                    class: ["gl-input", model.errors[:street2].present? ? "gl-input-error" : nil],
+                                    data: { action: "input->empty-destroy#update", 
+                                            empty_destroy_target: "inputs" } %>
+      </div>
+      <div class="gl-form-field">
+        <%= address_form.label :city, class: "gl-form-label" %>
+        <%= address_form.text_field :city, 
+                                    autocomplete: "address-level2", 
+                                    class: ["gl-input", model.errors[:city].present? ? "gl-input-error" : nil],
+                                    data: { action: "input->empty-destroy#update", 
+                                            empty_destroy_target: "inputs" } %>
+      </div>
+      <div class="gl-form-field">
+        <%= address_form.label :state, class: "gl-form-label" %>
+        <%= address_form.text_field :state, 
+                                    autocomplete: "address-level1", 
+                                    class: ["gl-input", model.errors[:state].present? ? "gl-input-error" : nil],
+                                    data: { action: "input->empty-destroy#update", 
+                                            empty_destroy_target: "inputs" } %>
+      </div>
+      <div class="gl-form-field">
+        <%= address_form.label :zip, class: "gl-form-label" %>
+        <%= address_form.text_field :zip, 
+                                    autocomplete: "postal-code", 
+                                    class: ["gl-input", model.errors[:zip].present? ? "gl-input-error" : nil],
+                                    data: { action: "input->empty-destroy#update", 
+                                            empty_destroy_target: "inputs" } %>
+      </div>
+      <div class="gl-form-field">
+        <%= address_form.label :country, class: "gl-form-label" %>
+        <%= address_form.text_field :country, 
+                                    autocomplete: "country-name", 
+                                    class: ["gl-input", model.errors[:country].present? ? "gl-input-error" : nil],
+                                    data: { action: "input->empty-destroy#update", 
+                                            empty_destroy_target: "inputs" } %>
+      </div>
     </div>
-    <div class="gl-form-field-wide">
-      <%= address_form.label :street2, class: "gl-form-label" %>
-      <%= address_form.text_field :street2, autocomplete: "address-line2", class: ["gl-input", model.errors[:street2].present? ? "gl-input-error" : nil] %>
-    </div>
-    <div class="gl-form-field">
-      <%= address_form.label :city, class: "gl-form-label" %>
-      <%= address_form.text_field :city, autocomplete: "address-level2", class: ["gl-input", model.errors[:city].present? ? "gl-input-error" : nil] %>
-    </div>
-    <div class="gl-form-field">
-      <%= address_form.label :state, class: "gl-form-label" %>
-      <%= address_form.text_field :state, autocomplete: "address-level1", class: ["gl-input", model.errors[:state].present? ? "gl-input-error" : nil] %>
-    </div>
-    <div class="gl-form-field">
-      <%= address_form.label :zip, class: "gl-form-label" %>
-      <%= address_form.text_field :zip, autocomplete: "postal-code", class: ["gl-input", model.errors[:zip].present? ? "gl-input-error" : nil] %>
-    </div>
-    <div class="gl-form-field">
-      <%= address_form.label :country, class: "gl-form-label" %>
-      <%= address_form.text_field :country, autocomplete: "country-name", class: ["gl-input", model.errors[:country].present? ? "gl-input-error" : nil] %>
-    </div>
-  </div>
-<% end %>
+  <% end %>
+</div>

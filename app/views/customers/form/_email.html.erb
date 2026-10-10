@@ -1,9 +1,16 @@
-<%= form.fields_for attribute do |email_form| %>
-  <%= email_form.hidden_field :id %> 
-  <%= email_form.hidden_field :_destroy %>
+<div data-controller="empty-destroy">
+  <%= form.fields_for attribute do |email_form| %>
+    <%= email_form.hidden_field :id %> 
+    <%= email_form.hidden_field :_destroy, data: { empty_destroy_target: "destroy" } %>
 
-  <div class="gl-form-field">
-    <%= email_form.label :address, attribute.to_s.humanize, class: "gl-form-label" %>
-    <%= email_form.email_field :address, autocomplete: "email", class: ["gl-input", model.errors[:address].present? ? "gl-input-error" : nil] %>
-  </div>
-<% end %>
+    <div class="gl-form-field">
+      <%= email_form.label :address, 
+                           attribute.to_s.humanize, class: "gl-form-label" %>
+      <%= email_form.email_field :address, 
+                                 autocomplete: "email", 
+                                 class: ["gl-input", model.errors[:address].present? ? "gl-input-error" : nil],
+                                 data: { action: "input->empty-destroy#update", 
+                                         empty_destroy_target: "inputs" } %>
+    </div>
+  <% end %>
+</div>
