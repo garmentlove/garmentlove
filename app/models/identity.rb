@@ -17,11 +17,11 @@ class Identity < ApplicationRecord
     end
 
     def find_by_email(email_address, with: :user)
-      includes(with.to_sym => :email).find_by(with.to_sym => { email_addresses: { address: email_address } })
+      send(with.to_s.pluralize).includes(with.to_sym => :email).find_by(with.to_sym => { email_addresses: { address: email_address } })
     end
 
     def find_by_cellphone(cellphone, with: :user)
-      includes(with.to_sym => :cellphone).find_by(with.to_sym => { telephones: { number: cellphone } })
+      send(with.to_s.pluralize).includes(with.to_sym => :cellphone).find_by(with.to_sym => { telephones: { number: cellphone } })
     end
 
     def find_by_username(username, with: :user)
