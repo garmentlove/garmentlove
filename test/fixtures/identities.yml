@@ -6,8 +6,8 @@ one:
 two:
   userable: two (Customer)
 
-three:
+user_one:
   userable: one (User)
   
-four: 
+user_two:
   userable: two (User)

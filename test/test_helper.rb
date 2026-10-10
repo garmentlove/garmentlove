@@ -11,5 +11,9 @@ module ActiveSupport
     fixtures :all
 
     # Add more helper methods to be used by all tests here...
+    def sign_in(user)
+      post session_url, params: { sign_in: user.username }
+      post session_magic_link_url, params: { code: user.identity.magic_links.first.code }
+    end
   end
 end
