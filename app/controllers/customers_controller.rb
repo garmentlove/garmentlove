@@ -30,6 +30,7 @@ class CustomersController < ApplicationController
         format.html { redirect_to @customer, notice: "Customer was successfully created." }
         format.json { render :show, status: :created, location: @customer }
       else
+        build_associations
         format.html { render :new, status: :unprocessable_content }
         format.json { render json: @customer.errors, status: :unprocessable_content }
       end
