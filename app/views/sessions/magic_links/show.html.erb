@@ -1,15 +1,10 @@
-<section class="gl-auth-panel gl-code-panel">
-  <% if flash[:notice] %>
-    <p class="gl-auth-message gl-auth-message-notice" role="status"><%= flash[:notice] %></p>
-  <% end %>
-  <% if flash[:alert] %>
-    <p class="gl-auth-message gl-auth-message-alert" role="alert"><%= flash[:alert] %></p>
-  <% end %>
-
+<section class="gl-auth-panel gl-code-panel <%= flash[:alert] ? "animation-shake" : "" %>">
   <div class="gl-auth-code-intro">
     <h1>Enter Verification Code</h1>
     <p>Enter the secure single-use token sent to your email address.</p>
   </div>
+
+  <%= render partial: "shared/body/flash" %>
 
   <%= form_with url: session_magic_link_path, class: "gl-form gl-auth-form" do |form| %>
     <div class="gl-form-field">

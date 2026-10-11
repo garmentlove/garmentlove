@@ -1,11 +1,4 @@
 <section class="gl-auth-panel gl-sign-in-panel <%= flash[:alert] ? "animation-shake" : "" %>">
-  <% if flash[:notice] %>
-    <p class="gl-auth-message gl-auth-message-notice" role="status"><%= flash[:notice] %></p>
-  <% end %>
-  <% if flash[:alert] %>
-    <p class="gl-auth-message gl-auth-message-alert" role="alert"><%= flash[:alert] %></p>
-  <% end %>
-
   <div class="gl-auth-brand">
     <div class="gl-auth-brand-mark" aria-hidden="true">
       <span>✦</span>
@@ -17,6 +10,8 @@
     <h1>Welcome — Please Sign In</h1>
     <p>Enter your registered username, email, or phone number. We'll email you a single-use sign-in code.</p>
   </div>
+
+  <%= render partial: "shared/body/flash" %>
 
   <%= form_with url: session_path, class: "gl-form gl-auth-form" do |form| %>
     <div class="gl-form-field">

@@ -7,19 +7,29 @@ class SessionsController < ApplicationController
   end
 
   def create
-    email_address = params[:sign_in].to_s.strip.downcase
-    identity = Identity.find_for_authentication(email_address, with: :user) if email_address.present?
-
-    if identity
-      magic_link = identity.magic_links.create!(purpose: :sign_in)
-      MagicLinkMailer.with(code: magic_link.code, email_address: identity.email).sign_in.deliver_later
+    if identity = Identity.find_for_authentication(sign_in_param, with: :user)
+      sign_in identity
+    else
+      redirect_to new_session_path, alert: "No account found."
     end
-
-    redirect_to session_magic_link_path, notice: "If an account exists for that email, a sign-in code is on its way."
   end
 
   def destroy
     terminate_session
     redirect_to new_session_path, status: :see_other
   end
+
+  private
+    def sign_in_param
+      params.expect(:sign_in)
+    end
+
+    def sign_in(identity)
+      magic_link = identity.send_magic_link(purpose: :sign_in)
+      set_pending_authentication_token(magic_link)
+
+      respond_to do |format|
+        format.html { redirect_to session_magic_link_path, notice: "A sign-in code is on its way." }
+      end
+    end
 end

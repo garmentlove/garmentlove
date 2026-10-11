@@ -4,6 +4,8 @@ module Authentication
   included do
     before_action :require_authentication
     helper_method :authenticated?
+
+    include Authentication::ViaMagicLink
   end
 
   class_methods do

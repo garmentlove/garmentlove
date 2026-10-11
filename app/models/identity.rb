@@ -35,6 +35,14 @@ class Identity < ApplicationRecord
     end
   end
 
+  def send_magic_link(**attributes)
+    attributes[:purpose] = attributes.delete(:for) if attributes.key?(:for)
+
+    magic_links.create!(attributes).tap do |magic_link|
+      MagicLinkMailer.with(code: magic_link.code, email_address: email).sign_in.deliver_later
+    end
+  end
+
   def email
     userable.email&.address
   end
