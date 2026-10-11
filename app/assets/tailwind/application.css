@@ -13,40 +13,6 @@
 }
 
 :root,
-[data-theme="dark"] {
-  color-scheme: dark;
-  --gl-bg: #0a0e1a;
-  --gl-bg-radial: rgba(125, 211, 252, 0.08);
-  --gl-header-bg: rgba(10, 14, 26, 0.72);
-  --gl-surface: rgba(15, 21, 36, 0.6);
-  --gl-surface-raised: rgba(15, 21, 36, 0.75);
-  --gl-surface-inset: rgba(10, 14, 26, 0.4);
-  --gl-input-bg: rgba(10, 14, 26, 0.55);
-  --gl-text: #f1f5f9;
-  --gl-text-strong: #fff;
-  --gl-text-secondary: #cbd5e1;
-  --gl-text-muted: #94a3b8;
-  --gl-text-subtle: #64748b;
-  --gl-accent: #7dd3fc;
-  --gl-accent-bg: rgba(125, 211, 252, 0.1);
-  --gl-accent-bg-hover: rgba(125, 211, 252, 0.2);
-  --gl-accent-border: rgba(125, 211, 252, 0.15);
-  --gl-border: rgba(125, 211, 252, 0.1);
-  --gl-border-soft: rgba(255, 255, 255, 0.1);
-  --gl-border-hover: rgba(125, 211, 252, 0.2);
-  --gl-hover: rgba(255, 255, 255, 0.025);
-  --gl-hover-soft: rgba(255, 255, 255, 0.05);
-  --gl-danger: #fecdd3;
-  --gl-danger-bg: rgba(253, 164, 175, 0.1);
-  --gl-danger-border: rgba(253, 164, 175, 0.2);
-  --gl-success: #a7f3d0;
-  --gl-success-bg: rgba(110, 231, 183, 0.1);
-  --gl-success-border: rgba(110, 231, 183, 0.15);
-  --gl-dock-bg: rgba(15, 21, 36, 0.9);
-  --gl-dock-shadow: rgba(0, 0, 0, 0.28);
-  --gl-dock-active-bg: rgba(125, 211, 252, 0.1);
-}
-
 [data-theme="light"] {
   color-scheme: light;
   --gl-bg: #f4f8fc;
@@ -79,6 +45,40 @@
   --gl-dock-bg: rgba(255, 255, 255, 0.96);
   --gl-dock-shadow: rgba(23, 38, 56, 0.12);
   --gl-dock-active-bg: #eff8ff;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --gl-bg: #0a0e1a;
+  --gl-bg-radial: rgba(125, 211, 252, 0.08);
+  --gl-header-bg: rgba(10, 14, 26, 0.72);
+  --gl-surface: rgba(15, 21, 36, 0.6);
+  --gl-surface-raised: rgba(15, 21, 36, 0.75);
+  --gl-surface-inset: rgba(10, 14, 26, 0.4);
+  --gl-input-bg: rgba(10, 14, 26, 0.55);
+  --gl-text: #f1f5f9;
+  --gl-text-strong: #fff;
+  --gl-text-secondary: #cbd5e1;
+  --gl-text-muted: #94a3b8;
+  --gl-text-subtle: #64748b;
+  --gl-accent: #7dd3fc;
+  --gl-accent-bg: rgba(125, 211, 252, 0.1);
+  --gl-accent-bg-hover: rgba(125, 211, 252, 0.2);
+  --gl-accent-border: rgba(125, 211, 252, 0.15);
+  --gl-border: rgba(125, 211, 252, 0.1);
+  --gl-border-soft: rgba(255, 255, 255, 0.1);
+  --gl-border-hover: rgba(125, 211, 252, 0.2);
+  --gl-hover: rgba(255, 255, 255, 0.025);
+  --gl-hover-soft: rgba(255, 255, 255, 0.05);
+  --gl-danger: #fecdd3;
+  --gl-danger-bg: rgba(253, 164, 175, 0.1);
+  --gl-danger-border: rgba(253, 164, 175, 0.2);
+  --gl-success: #a7f3d0;
+  --gl-success-bg: rgba(110, 231, 183, 0.1);
+  --gl-success-border: rgba(110, 231, 183, 0.15);
+  --gl-dock-bg: rgba(15, 21, 36, 0.9);
+  --gl-dock-shadow: rgba(0, 0, 0, 0.28);
+  --gl-dock-active-bg: rgba(125, 211, 252, 0.1);
 }
 
 @layer components {
@@ -1470,6 +1470,126 @@
     50% {
       transform: translate3d(0, -10px, 0) rotate(4deg);
     }
+  }
+
+  [data-theme="dark"] .gl-auth-background {
+    background:
+      radial-gradient(ellipse at 83% 74%, rgba(104, 213, 235, 0.12), transparent 36%),
+      radial-gradient(ellipse at 13% 24%, rgba(130, 203, 247, 0.1), transparent 36%),
+      linear-gradient(128deg, #0a0e1a 0%, #101827 52%, #0b1220 100%);
+    color: var(--gl-text);
+  }
+
+  [data-theme="dark"] .gl-auth-dashboard,
+  [data-theme="dark"] .gl-auth-concierge,
+  [data-theme="dark"] .gl-auth-location {
+    color: var(--gl-text-muted);
+  }
+
+  [data-theme="dark"] .gl-auth-dashboard:hover,
+  [data-theme="dark"] .gl-auth-concierge svg {
+    color: var(--gl-accent);
+  }
+
+  [data-theme="dark"] .gl-auth-back,
+  [data-theme="dark"] .gl-auth-location {
+    border-color: var(--gl-border);
+    background: var(--gl-surface);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  [data-theme="dark"] .gl-auth-panel {
+    border-color: var(--gl-border);
+    background: var(--gl-surface-raised);
+    box-shadow:
+      0 20px 50px rgba(0, 0, 0, 0.28),
+      0 2px 8px rgba(0, 0, 0, 0.18);
+  }
+
+  [data-theme="dark"] .gl-auth-brand-mark {
+    border-color: var(--gl-accent-border);
+    background: var(--gl-surface-inset);
+    color: var(--gl-accent);
+  }
+
+  [data-theme="dark"] .gl-auth-brand-mark > span {
+    border-color: #101827;
+    background: var(--gl-accent);
+    color: #0a0e1a;
+  }
+
+  [data-theme="dark"] .gl-auth-brand-name,
+  [data-theme="dark"] .gl-auth-intro h1,
+  [data-theme="dark"] .gl-auth-intro h2,
+  [data-theme="dark"] .gl-auth-code-intro h1 {
+    color: var(--gl-text-strong);
+  }
+
+  [data-theme="dark"] .gl-auth-intro p,
+  [data-theme="dark"] .gl-auth-code-intro p,
+  [data-theme="dark"] .gl-auth-alternative,
+  [data-theme="dark"] .gl-auth-footer {
+    color: var(--gl-text-muted);
+  }
+
+  [data-theme="dark"] .gl-auth-panel .gl-form-label {
+    color: var(--gl-text-secondary);
+  }
+
+  [data-theme="dark"] .gl-auth-verification,
+  [data-theme="dark"] .gl-auth-alternative span,
+  [data-theme="dark"] .gl-auth-alternative svg,
+  [data-theme="dark"] .gl-auth-icon {
+    color: var(--gl-accent);
+  }
+
+  [data-theme="dark"] .gl-auth-panel .gl-auth-input {
+    border-color: var(--gl-border-soft);
+    background: var(--gl-input-bg);
+    color: var(--gl-text);
+    box-shadow: none;
+  }
+
+  [data-theme="dark"] .gl-auth-panel .gl-auth-input::placeholder {
+    color: var(--gl-text-subtle);
+  }
+
+  [data-theme="dark"] .gl-auth-panel .gl-auth-input:focus {
+    border-color: var(--gl-accent);
+    box-shadow: 0 0 0 3px var(--gl-accent-bg);
+  }
+
+  [data-theme="dark"] .gl-auth-integrity {
+    border-color: var(--gl-border);
+    background: var(--gl-surface-inset);
+  }
+
+  [data-theme="dark"] .gl-auth-integrity-icon {
+    border-color: var(--gl-accent-border);
+    background: var(--gl-surface);
+    color: var(--gl-accent);
+  }
+
+  [data-theme="dark"] .gl-auth-integrity strong {
+    color: var(--gl-text-secondary);
+  }
+
+  [data-theme="dark"] .gl-auth-integrity small {
+    color: var(--gl-text-muted);
+  }
+
+  [data-theme="dark"] .gl-auth-integrity-check {
+    color: var(--gl-accent);
+  }
+
+  [data-theme="dark"] .gl-auth-message-notice {
+    background: var(--gl-success-bg);
+    color: var(--gl-success);
+  }
+
+  [data-theme="dark"] .gl-auth-message-alert {
+    background: var(--gl-danger-bg);
+    color: var(--gl-danger);
   }
 }
 
