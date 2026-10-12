@@ -24,6 +24,8 @@ gem "image_processing", "~> 2.2"
 
 gem "lexxy", "~> 1.0.0"
 gem "phonelib"
+gem "ancestry"
+gem "money-rails"
 
 group :development, :test do
   gem "faker"

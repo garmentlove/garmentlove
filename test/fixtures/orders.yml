@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  customer: one
+  order_type: MyString
+  rush: false
+  pieces_count: 1
+  due_at: 2026-10-11 19:33:34
+  notes: MyText
+  fulfill_at: 2026-10-11 19:33:34
+  status: 1
+
+two:
+  customer: two
+  order_type: MyString
+  rush: false
+  pieces_count: 1
+  due_at: 2026-10-11 19:33:34
+  notes: MyText
+  fulfill_at: 2026-10-11 19:33:34
+  status: 1

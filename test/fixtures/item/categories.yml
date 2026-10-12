@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# Parents
+brands:
+  name: Brands
+  required: true
+  select: single
+
+colors:
+  name: Colors
+  select: multiple
+
+pattern:
+  name: Pattern
+  select: single
+
+fabrics:
+  name: Fabrics
+  select: single
+
+speical_cares:
+  name: Speical Cares
+  select: multiple

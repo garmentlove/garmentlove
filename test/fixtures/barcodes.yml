@@ -1,0 +1,148 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  value: MyText
+  scannable: one
+  scannable_type: Scannable
+
+two:
+  value: MyText
+  scannable: two
+  scannable_type: Scannable
+
+
+king_flat:
+  value: KING_FLAT
+  scannable: king_flat (Item)
+
+king_fitted:
+  value: KING_FITTED
+  scannable: king_fitted (Item)
+
+kpc:
+  value: KPC
+  scannable: kpc (Item)
+
+queen_flat:
+  value: QUEEN_FLAT
+  scannable: queen_flat (Item)
+
+queen_fitted:
+  value: QUEEN_FITTED
+  scannable: queen_fitted (Item)
+
+twin_flat:
+  value: TWIN_FLAT
+  scannable: twin_flat (Item)
+
+twin_fitted:
+  value: TWIN_FITTED
+  scannable: twin_fitted (Item)
+
+spc:
+  value: SPC
+  scannable: spc (Item)
+
+blankets:
+  value: BLANKETS
+  scannable: blankets (Item)
+
+pool_towel:
+  value: POOL_TOWEL
+  scannable: pool_towel (Item)
+
+both_towel:
+  value: BATH_TOWEL
+  scannable: bath_towel (Item)
+
+hand_towel:
+  value: HAND_TOWEL
+  scannable: hand_towel (Item)
+
+wash_cloth:
+  value: WASH_CLOTH
+  scannable: wash_cloth (Item)
+
+bath_mats:
+  value: BATH_MATS
+  scannable: bath_mats (Item)
+
+cosmetic:
+  value: COSMETIC
+  scannable: cosmetic (Item)
+
+kitchen_towel:
+  value: KITCHEN_TOWEL
+  scannable: kitchen_towel (Item)
+
+dish_cloth:
+  value: DISH_CLOTH
+  scannable: dish_cloth (Item)
+
+pot_holders:
+  value: POT_HOLDERS
+  scannable: pot_holders (Item)
+
+king_finishers:
+  value: KING_FINISHERS
+  scannable: king_finishers (Item)
+
+queen_finishers:
+  value: QUEEN_FINISHERS
+  scannable: queen_finishers (Item)
+
+bags:
+  value: BAGS
+  scannable: bags (Item)
+
+decorative_sheet:
+  value: DECORATIVE_SHEET
+  scannable: decorative_sheet (Item)
+
+comforters:
+  value: COMFORTERS
+  scannable: comforters (Item)
+
+matterss_pads:
+  value: MATTRESS_PADS
+  scannable: matterss_pads (Item)
+
+king_mattress_pad:
+  value: KING_MATTRESS_PAD
+  scannable: king_mattress_pad (Item)
+
+queen_mattress_pad:
+  value: QUEEN_MATTRESS_PAD
+  scannable: queen_mattress_pad (Item)
+
+twin_mattress_pad:
+  value: TWIN_MATTRESS_PAD
+  scannable: twin_mattress_pad (Item)
+
+bag_stand:
+  value: BAG_STAND
+  scannable: bag_stand (Item)
+
+blue_bag:
+  value: BLUE_BAG
+  scannable: blue_bag (Item)
+
+red_bag:
+  value: RED_BAG
+  scannable: red_bag (Item)
+
+purple_bag:
+  value: PURPLE_BAG
+  scannable: purple_bag (Item)
+
+green_bag:
+  value: GREEN_BAG
+  scannable: green_bag (Item)
+
+yellow_bag:
+  value: YELLOW_BAG
+  scannable: yellow_bag (Item)
+
+packout:
+  value: PACKOUT
+  scannable: packout (Item)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2026_10_09_213352) do
+ActiveRecord::Schema[8.2].define(version: 2026_10_11_235603) do
   create_table "access_tokens", force: :cascade do |t|
     t.integer "identity_id", null: false
     t.string "token"
@@ -74,6 +74,17 @@ ActiveRecord::Schema[8.2].define(version: 2026_10_09_213352) do
     t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable"
   end
 
+  create_table "barcodes", force: :cascade do |t|
+    t.text "value", null: false
+    t.integer "symbology", default: 0, null: false
+    t.string "scannable_type", null: false
+    t.integer "scannable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["scannable_type", "scannable_id"], name: "index_barcodes_on_scannable"
+    t.index ["value"], name: "index_barcodes_on_value"
+  end
+
   create_table "customers", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name", null: false
@@ -101,6 +112,44 @@ ActiveRecord::Schema[8.2].define(version: 2026_10_09_213352) do
     t.index ["userable_type", "userable_id"], name: "index_identities_on_userable"
   end
 
+  create_table "item_categories", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "color"
+    t.string "ancestry"
+    t.boolean "required", default: false
+    t.boolean "active", default: true
+    t.string "select", default: "single", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ancestry"], name: "index_item_categories_on_ancestry"
+    t.index ["name"], name: "index_item_categories_on_name"
+  end
+
+  create_table "item_descriptors", force: :cascade do |t|
+    t.integer "item_id", null: false
+    t.integer "item_category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_category_id"], name: "index_item_descriptors_on_item_category_id"
+    t.index ["item_id"], name: "index_item_descriptors_on_item_id"
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.integer "customer_id"
+    t.string "name"
+    t.text "description"
+    t.boolean "ownable", default: true, null: false
+    t.integer "status", default: 0, null: false
+    t.decimal "weight", precision: 8, scale: 2
+    t.integer "bundle_quantity", default: 1, null: false
+    t.boolean "active", default: true, null: false
+    t.integer "manual_price_cents"
+    t.integer "unit_price_cents"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_items_on_customer_id"
+  end
+
   create_table "magic_links", force: :cascade do |t|
     t.string "code", limit: 255, null: false
     t.datetime "expires_at", null: false
@@ -109,6 +158,47 @@ ActiveRecord::Schema[8.2].define(version: 2026_10_09_213352) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["identity_id"], name: "index_magic_links_on_identity_id"
+  end
+
+  create_table "order_line_items", force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.integer "item_id", null: false
+    t.integer "quantity", default: 1, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_order_line_items_on_item_id"
+    t.index ["order_id"], name: "index_order_line_items_on_order_id"
+  end
+
+  create_table "order_surcharge_lines", force: :cascade do |t|
+    t.integer "price_surcharge_id", null: false
+    t.integer "order_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_surcharge_lines_on_order_id"
+    t.index ["price_surcharge_id"], name: "index_order_surcharge_lines_on_price_surcharge_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "customer_id", null: false
+    t.string "order_type", default: "cleaning", null: false
+    t.datetime "due_at", null: false
+    t.datetime "fulfill_at"
+    t.boolean "rush", default: false, null: false
+    t.integer "pieces_count", default: 0, null: false
+    t.text "notes"
+    t.integer "status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
+  end
+
+  create_table "price_surcharges", force: :cascade do |t|
+    t.integer "amount", default: 0, null: false
+    t.text "description"
+    t.integer "modifer", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -140,6 +230,14 @@ ActiveRecord::Schema[8.2].define(version: 2026_10_09_213352) do
   add_foreign_key "access_tokens", "identities"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "item_descriptors", "item_categories"
+  add_foreign_key "item_descriptors", "items"
+  add_foreign_key "items", "customers"
   add_foreign_key "magic_links", "identities"
+  add_foreign_key "order_line_items", "items"
+  add_foreign_key "order_line_items", "orders"
+  add_foreign_key "order_surcharge_lines", "orders"
+  add_foreign_key "order_surcharge_lines", "price_surcharges"
+  add_foreign_key "orders", "customers"
   add_foreign_key "sessions", "identities"
 end

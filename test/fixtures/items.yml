@@ -1,0 +1,165 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  description: MyText
+
+two:
+  description: MyText
+
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+king_flat:
+  name: King Flat
+  ownable: false
+  bundle_quantity: 5
+
+king_fitted:
+  name: King Fitted
+  ownable: false
+  bundle_quantity: 5
+
+kpc:
+  name: KPC
+  ownable: false
+  bundle_quantity: 25
+
+queen_flat:
+  name: Queen Flat
+  ownable: false
+  bundle_quantity: 5
+
+queen_fitted:
+  name: Queen Fitted
+  ownable: false
+  bundle_quantity: 5
+
+twin_flat:
+  name: Twin Flat
+  ownable: false
+  bundle_quantity: 5
+
+twin_fitted:
+  name: Twin Fitted
+  ownable: false
+  bundle_quantity: 5
+
+spc:
+  name: SPC
+  ownable: false
+  bundle_quantity: 25
+
+blankets:
+  name: Blankets
+  ownable: false
+
+pool_towel:
+  name: Pool Towel
+  bundle_quantity: 5
+  ownable: false
+
+both_towel:
+  name: Bath Towel
+  bundle_quantity: 5
+  ownable: false
+
+hand_towel:
+  name: Hand Towel
+  bundle_quantity: 20
+  ownable: false
+
+wash_cloth:
+  name: Wash Cloth
+  bundle_quantity: 40
+  ownable: false
+
+bath_mats:
+  name: Bath Mats
+  bundle_quantity: 10
+  ownable: false
+
+cosmetic:
+  name: Cosmetic
+  bundle_quantity: 20
+  ownable: false
+
+kitchen_towel:
+  name: Kitchen Towel
+  bundle_quantity: 20
+  ownable: false
+
+dish_cloth:
+  name: Dish Cloth
+  bundle_quantity: 20
+  ownable: false
+
+pot_holders:
+  name: Pot Holders
+  bundle_quantity: 10
+  ownable: false
+
+king_finishers:
+  name: King Finishers
+  bundle_quantity: 5
+  ownable: false
+
+queen_finishers:
+  name: Queen Finishers
+  bundle_quantity: 5
+  ownable: false
+
+bags:
+  name: Bags
+  ownable: false
+
+decorative_sheet:
+  name: Decorative Sheet
+  bundle_quantity: 5
+  ownable: false
+
+comforters:
+  name: Comforters
+  ownable: false
+
+matterss_pads:
+  name: Mattress Pads
+  ownable: false
+
+king_mattress_pad:
+  name: King Mattress Pad
+  ownable: false
+
+queen_mattress_pad:
+  name: Queen Mattress Pad
+  ownable: false
+
+twin_mattress_pad:
+  name: Twin Mattress Pad
+  ownable: false
+
+bag_stand:
+  name: Bag Stand
+  ownable: false
+
+blue_bag:
+  name: Blue Bag
+  ownable: false
+
+red_bag:
+  name: Red Bag
+  ownable: false
+
+purple_bag:
+  name: Purple Bag
+  ownable: false
+
+green_bag:
+  name: Green Bag
+  ownable: false
+
+yellow_bag:
+  name: Yellow Bag
+  ownable: false
+
+packout:
+  name: Packout
+  ownable: false
