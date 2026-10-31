@@ -22,7 +22,7 @@ gem "kamal", require: false
 gem "thruster", require: false
 gem "image_processing", "~> 2.2"
 
-gem "lexxy", "~> 1.0.0"
+gem "lexxy", "~> 1.0.2"
 gem "phonelib"
 gem "ancestry"
 gem "money-rails"
