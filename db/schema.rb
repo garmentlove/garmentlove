@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2026_10_12_000000) do
+ActiveRecord::Schema[8.2].define(version: 2026_11_05_172226) do
   create_table "access_tokens", force: :cascade do |t|
     t.integer "identity_id", null: false
     t.string "token"
@@ -102,6 +102,22 @@ ActiveRecord::Schema[8.2].define(version: 2026_10_12_000000) do
     t.datetime "updated_at", null: false
     t.index ["address"], name: "index_email_addresses_on_address"
     t.index ["emailable_type", "emailable_id"], name: "index_email_addresses_on_emailable"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "eventable_type"
+    t.integer "eventable_id"
+    t.string "creator_type"
+    t.integer "creator_id"
+    t.string "controller"
+    t.string "action"
+    t.string "method", default: "text/html", null: false
+    t.string "authentication_type"
+    t.string "format"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["creator_type", "creator_id"], name: "index_events_on_creator"
+    t.index ["eventable_type", "eventable_id"], name: "index_events_on_eventable"
   end
 
   create_table "identities", force: :cascade do |t|

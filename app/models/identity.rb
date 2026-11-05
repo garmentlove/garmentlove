@@ -10,6 +10,7 @@ class Identity < ApplicationRecord
   has_many :sessions, dependent: :destroy
   has_many :magic_links, dependent: :destroy
   has_many :access_tokens, dependent: :destroy
+  has_many :events, as: :creator, dependent: :destroy
 
   class << self
     def find_for_authentication(value, with: :user)

@@ -37,6 +37,7 @@ module Authentication
           authenticate_or_request_with_http_token do |token|
             if identity = Identity.find_by_permissable_access_token(token, method: request.method)
               Current.identity = identity
+              Current.authentication_type = "bearer"
             end
           end
         else
