@@ -1,0 +1,141 @@
+<article class="gl-pos-item" data-line-item data-controller="item-entry photo-markup" data-action="item-entry:show-details->item-entry#showDetails catalog:item-selected->photo-markup#catalogSelected catalog:item-cleared->photo-markup#catalogCleared">
+  <div class="gl-pos-item-top">
+    <div>
+      <span class="gl-pos-item-number">ITEM</span>
+      <strong><%= kind == "rental" ? "Textile" : (kind == "retail" ? "Product" : (kind == "wash_and_fold" ? "Laundry bag" : "Garment")) %></strong>
+    </div>
+    <% unless kind == "wash_and_fold" %>
+      <button type="button" class="gl-pos-remove" aria-label="Remove item" data-action="order-form#removeItem">×</button>
+    <% end %>
+  </div>
+
+  <ol class="gl-pos-item-progress" aria-label="Item entry steps">
+    <li data-item-entry-target="stepLabel">1. Barcode</li>
+    <li data-item-entry-target="stepLabel">2. Photo</li>
+    <li data-item-entry-target="stepLabel">3. Details</li>
+  </ol>
+
+  <section class="gl-pos-item-stage" data-item-entry-target="barcodeStep">
+    <label class="gl-pos-label" for="item-barcode-<%= index %>">Scan item barcode</label>
+    <input id="item-barcode-<%= index %>" data-item-entry-target="barcodeInput" data-action="keydown.enter->item-entry#continueToPhoto" type="text" autocomplete="off" class="gl-pos-input gl-pos-scan-input" placeholder="Scan or type the item barcode">
+    <div class="gl-pos-item-stage-actions">
+      <button type="button" class="gl-pos-button-secondary" data-action="item-entry#skipBarcode">No barcode</button>
+      <button type="button" class="gl-pos-submit gl-pos-step-button" data-action="item-entry#continueToPhoto">Continue to photo</button>
+    </div>
+    <input type="hidden" data-item-entry-target="barcodeField" name="order[line_items_attributes][<%= index %>][item_attributes][barcode_value]">
+  </section>
+
+  <section class="gl-pos-item-stage" data-item-entry-target="photoStep" hidden>
+    <div class="gl-pos-photo-stage" data-photo-markup-target="stage" data-action="<%= 'click->photo-markup#mark' if kind == "cleaning" %>">
+      <video data-photo-markup-target="video" autoplay playsinline hidden></video>
+      <img data-photo-markup-target="preview" alt="Item photo preview" hidden>
+      <span data-photo-markup-target="placeholder">Take or upload a photo of this item</span>
+      <div class="gl-pos-photo-marks" data-photo-markup-target="marks"></div>
+    </div>
+    <div class="gl-pos-photo-tools">
+      <label class="gl-pos-label">Item photo</label>
+      <div class="gl-pos-camera-actions">
+        <button type="button" class="gl-pos-button-secondary" data-action="photo-markup#startCamera" data-photo-markup-target="startCameraButton">Use camera</button>
+        <button type="button" class="gl-pos-button-secondary" data-action="photo-markup#capture" data-photo-markup-target="captureButton" hidden>Take photo</button>
+        <button type="button" class="gl-pos-button-secondary" data-action="photo-markup#stopCamera" data-photo-markup-target="stopCameraButton" hidden>Cancel camera</button>
+      </div>
+      <input type="file" name="order[line_items_attributes][<%= index %>][item_attributes][photos][]" accept="image/*" capture="environment" data-photo-markup-target="file" data-action="change->photo-markup#preview" class="gl-pos-file">
+      <p class="gl-pos-hint" data-photo-markup-target="cameraMessage" role="status">Use the device camera or choose an image. A photo is optional for existing catalog items.</p>
+      <% if kind == "cleaning" %>
+        <label class="gl-pos-label">Mark type</label>
+        <select data-photo-markup-target="kind" class="gl-pos-input">
+          <option value="alteration">Alteration</option>
+          <option value="spot">Spot</option>
+          <option value="damage">Damage</option>
+        </select>
+        <label class="gl-pos-label">Mark note</label>
+        <input data-photo-markup-target="note" class="gl-pos-input" placeholder="Describe the alteration or issue">
+        <input type="hidden" name="order[line_items_attributes][<%= index %>][item_attributes][annotations]" value="[]" data-photo-markup-target="annotations">
+        <p class="gl-pos-hint">After adding a photo, click it to place alteration, spot, or damage marks.</p>
+      <% end %>
+    </div>
+    <div class="gl-pos-item-stage-actions">
+      <button type="button" class="gl-pos-button-secondary" data-action="item-entry#backToBarcode">Back</button>
+      <button type="button" class="gl-pos-submit gl-pos-step-button" data-action="item-entry#continueToDetails">Continue to details</button>
+    </div>
+    <canvas data-photo-markup-target="canvas" hidden></canvas>
+  </section>
+
+  <section class="gl-pos-item-stage" data-item-entry-target="detailsStep" hidden>
+    <% if %w[rental retail].include?(kind) %>
+      <label class="gl-pos-label">Catalog item</label>
+      <select name="order[line_items_attributes][<%= index %>][item_id]" class="gl-pos-input" data-action="change->order-form#selectCatalogItem">
+        <option value="">New item or choose inventory</option>
+        <% @catalog_items.each do |item| %>
+          <option value="<%= item.id %>" data-name="<%= item.name %>" data-price="<%= item.price_cents / 100.0 %>" data-bundle-size="<%= item.bundle_quantity %>" data-barcode="<%= item.barcode&.value %>"><%= item.name %><%= item.barcode&.value.present? ? " · #{item.barcode.value}" : "" %> · bundle of <%= item.bundle_quantity %></option>
+        <% end %>
+      </select>
+    <% end %>
+
+    <% unless kind == "wash_and_fold" %>
+      <div class="gl-pos-grid">
+        <div>
+          <label class="gl-pos-label">Item name / type</label>
+          <input name="order[line_items_attributes][<%= index %>][item_attributes][name]" class="gl-pos-input" placeholder="<%= kind == "rental" ? "e.g. Bath towel" : (kind == "retail" ? "e.g. Garment bag" : "e.g. Wool blazer") %>" data-action="input->order-form#refreshTotal">
+        </div>
+        <% if kind == "cleaning" %>
+          <div>
+            <label class="gl-pos-label">Barcode</label>
+            <input data-item-entry-target="barcodeDisplay" class="gl-pos-input" readonly>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if kind == "cleaning" %>
+      <div class="gl-pos-grid gl-pos-descriptors">
+        <% { "Item type" => "item_type", "Colors" => "colors", "Fabrics" => "fabrics", "Brand" => "brand", "Pattern" => "pattern" }.each do |label, key| %>
+          <div>
+            <label class="gl-pos-label"><%= label %></label>
+            <input name="order[line_items_attributes][<%= index %>][item_attributes][details][<%= key %>]" class="gl-pos-input" placeholder="Add <%= label.downcase %>">
+          </div>
+        <% end %>
+      </div>
+      <label class="gl-pos-label">Garment description</label>
+      <textarea name="order[line_items_attributes][<%= index %>][item_attributes][description]" rows="2" class="gl-pos-input gl-pos-textarea" placeholder="Describe garment details…"></textarea>
+    <% end %>
+
+    <% if kind == "wash_and_fold" %>
+      <input type="hidden" name="order[line_items_attributes][<%= index %>][item_attributes][name]" value="Wash &amp; Fold">
+      <div class="gl-pos-grid gl-pos-item-bottom">
+        <div>
+          <label class="gl-pos-label" for="wash-weight-<%= index %>">Weight (lb)</label>
+          <input id="wash-weight-<%= index %>" name="order[line_items_attributes][<%= index %>][item_attributes][weight]" type="number" min="0" step="0.1" class="gl-pos-input" placeholder="e.g. 12.5">
+        </div>
+        <div>
+          <label class="gl-pos-label">Service price ($)</label>
+          <input name="order[line_items_attributes][<%= index %>][item_attributes][manual_price]" type="number" min="0" step="0.01" class="gl-pos-input" placeholder="0.00" data-action="input->order-form#refreshTotal">
+        </div>
+      </div>
+      <input type="hidden" name="order[line_items_attributes][<%= index %>][quantity]" value="1">
+      <input type="hidden" name="order[line_items_attributes][<%= index %>][item_attributes][ownable]" value="false">
+    <% else %>
+    <div class="gl-pos-grid gl-pos-item-bottom">
+      <div>
+        <label class="gl-pos-label"><%= kind == "rental" ? "Bundles" : "Quantity" %></label>
+        <input name="order[line_items_attributes][<%= index %>][quantity]" type="number" min="1" value="1" class="gl-pos-input" data-action="input->order-form#refreshTotal">
+      </div>
+      <div>
+        <label class="gl-pos-label"><%= kind == "rental" ? "Bundle size" : "Pieces" %></label>
+        <input name="order[line_items_attributes][<%= index %>][item_attributes][bundle_quantity]" type="number" min="1" value="1" class="gl-pos-input">
+      </div>
+      <div>
+        <label class="gl-pos-label">Price ($)</label>
+        <input name="order[line_items_attributes][<%= index %>][item_attributes][manual_price]" type="number" min="0" step="0.01" class="gl-pos-input" placeholder="0.00" data-action="input->order-form#refreshTotal">
+      </div>
+      <input type="hidden" name="order[line_items_attributes][<%= index %>][item_attributes][ownable]" value="<%= kind == "cleaning" %>">
+    </div>
+    <% end %>
+    <div class="gl-pos-item-stage-actions">
+      <button type="button" class="gl-pos-button-secondary" data-action="item-entry#backToPhoto">Back to photo</button>
+      <% if kind != "wash_and_fold" %>
+        <button type="button" class="gl-pos-button-secondary" data-action="order-form#addItem">＋ Add another item</button>
+      <% end %>
+    </div>
+  </section>
+</article>

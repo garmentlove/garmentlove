@@ -822,6 +822,801 @@
   .gl-destructive-form {
     display: inline-flex;
   }
+
+  .gl-app-pos {
+    --gl-bg: #0a0e1a;
+    --gl-bg-radial: rgba(125, 211, 252, 0.08);
+    --gl-header-bg: rgba(10, 14, 26, 0.72);
+    --gl-surface: rgba(15, 21, 36, 0.6);
+    --gl-surface-raised: rgba(15, 21, 36, 0.75);
+    --gl-surface-inset: rgba(10, 14, 26, 0.4);
+    --gl-input-bg: rgba(10, 14, 26, 0.55);
+    --gl-text: #f1f5f9;
+    --gl-text-strong: #fff;
+    --gl-text-secondary: #cbd5e1;
+    --gl-text-muted: #94a3b8;
+    --gl-text-subtle: #64748b;
+    --gl-accent: #7dd3fc;
+    --gl-accent-bg: rgba(125, 211, 252, 0.1);
+    --gl-accent-bg-hover: rgba(125, 211, 252, 0.2);
+    --gl-accent-border: rgba(125, 211, 252, 0.15);
+    --gl-border: rgba(125, 211, 252, 0.1);
+    --gl-border-soft: rgba(255, 255, 255, 0.1);
+    --gl-border-hover: rgba(125, 211, 252, 0.2);
+    --gl-hover: rgba(255, 255, 255, 0.025);
+    --gl-hover-soft: rgba(255, 255, 255, 0.05);
+    --gl-danger: #fecdd3;
+    --gl-danger-bg: rgba(253, 164, 175, 0.1);
+    --gl-danger-border: rgba(253, 164, 175, 0.2);
+    --gl-success: #a7f3d0;
+    --gl-success-bg: rgba(110, 231, 183, 0.1);
+    --gl-success-border: rgba(110, 231, 183, 0.15);
+    --gl-dock-bg: rgba(15, 21, 36, 0.9);
+    --gl-dock-shadow: rgba(0, 0, 0, 0.28);
+    --gl-dock-active-bg: rgba(125, 211, 252, 0.1);
+    color-scheme: dark;
+  }
+
+  .gl-app-pos .gl-header {
+    background: var(--gl-header-bg);
+  }
+
+  .gl-app-pos .gl-dock {
+    background: var(--gl-dock-bg);
+  }
+
+  .gl-pos {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .gl-pos-heading,
+  .gl-pos-card-heading,
+  .gl-pos-item-top,
+  .gl-pos-confirmation-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .gl-pos-title {
+    color: var(--gl-text-strong);
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-weight: 600;
+    letter-spacing: 0.015em;
+    line-height: 1.2;
+  }
+
+  .gl-pos-form {
+    display: grid;
+    align-items: start;
+    gap: 1.25rem;
+    grid-template-columns: minmax(0, 1.65fr) minmax(17rem, 0.85fr);
+  }
+
+  .gl-pos-main {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .gl-pos-card {
+    border: 1px solid var(--gl-border);
+    border-radius: 1rem;
+    background: var(--gl-surface);
+    padding: 1.5rem;
+    backdrop-filter: blur(16px);
+  }
+
+  .gl-pos-card h2,
+  .gl-pos-confirmation h2 {
+    margin-top: 0.125rem;
+    color: var(--gl-text-strong);
+    font-size: 1.125rem;
+    font-weight: 600;
+    letter-spacing: 0.015em;
+  }
+
+  .gl-pos-kicker {
+    color: var(--gl-accent);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .gl-pos-step {
+    display: inline-grid;
+    width: 2rem;
+    height: 2rem;
+    place-items: center;
+    border: 1px solid var(--gl-accent-border);
+    border-radius: 0.625rem;
+    background: var(--gl-accent-bg);
+    color: var(--gl-accent);
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .gl-pos-customer-row {
+    display: grid;
+    align-items: center;
+    gap: 0.5rem 0.75rem;
+    grid-template-columns: minmax(7rem, 0.35fr) minmax(0, 1fr) auto;
+    margin-top: 1.5rem;
+  }
+
+  .gl-pos-label {
+    display: block;
+    margin-bottom: 0.45rem;
+    color: var(--gl-text-secondary);
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
+  .gl-pos-input {
+    width: 100%;
+    min-width: 0;
+    min-height: 2.75rem;
+    border: 1px solid var(--gl-border-soft);
+    border-radius: 0.625rem;
+    background: var(--gl-input-bg);
+    padding: 0.65rem 0.75rem;
+    color: var(--gl-text);
+    font: inherit;
+    font-size: 0.8125rem;
+    transition: border-color 150ms, box-shadow 150ms;
+  }
+
+  .gl-pos-input:focus {
+    border-color: rgba(125, 211, 252, 0.3);
+    box-shadow: 0 0 30px rgba(125, 211, 252, 0.05);
+    outline: none;
+  }
+
+  .gl-pos-input::placeholder {
+    color: var(--gl-text-subtle);
+  }
+
+  .gl-pos-input option {
+    background: #0f1524;
+    color: #f1f5f9;
+  }
+
+  .gl-pos-inline-link {
+    color: var(--gl-accent);
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+
+  .gl-pos-types {
+    min-width: 0;
+    margin-top: 1.5rem;
+    border: 0;
+    padding: 0;
+  }
+
+  .gl-pos-type-options {
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin-top: 0.45rem;
+  }
+
+  .gl-pos-type-option {
+    position: relative;
+    display: flex;
+    min-height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--gl-border-soft);
+    border-radius: 0.625rem;
+    background: rgba(255, 255, 255, 0.02);
+    color: var(--gl-text-muted);
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 500;
+    transition: background-color 150ms, border-color 150ms, color 150ms;
+  }
+
+  .gl-pos-type-option-active,
+  .gl-pos-type-option-active:hover {
+    border-color: var(--gl-accent-border);
+    background: var(--gl-accent-bg);
+    color: var(--gl-accent);
+  }
+
+  .gl-pos-wizard-step {
+    max-width: 52rem;
+    margin-inline: auto;
+  }
+
+  .gl-pos-customer-select {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .gl-pos-customer-select .gl-pos-submit {
+    justify-self: start;
+  }
+
+  .gl-pos-wizard-divider {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-block: 1.25rem;
+    color: var(--gl-text-subtle);
+    font-size: 0.75rem;
+  }
+
+  .gl-pos-wizard-divider::before,
+  .gl-pos-wizard-divider::after {
+    height: 1px;
+    flex: 1;
+    background: var(--gl-border-soft);
+    content: "";
+  }
+
+  .gl-pos-type-options-wizard {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-block: 1.25rem;
+  }
+
+  .gl-pos-type-option-card {
+    min-height: 6rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.45rem;
+    padding: 1rem;
+    text-align: left;
+  }
+
+  .gl-pos-type-option-card span {
+    color: var(--gl-text-subtle);
+    font-size: 0.6875rem;
+    font-weight: 400;
+  }
+
+  .gl-pos-type-option-card:hover {
+    border-color: var(--gl-accent-border);
+    background: var(--gl-accent-bg);
+    color: var(--gl-accent);
+  }
+
+  .gl-pos-selected-customer {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-block: 0.75rem;
+    border: 1px solid var(--gl-border-soft);
+    border-radius: 0.625rem;
+    padding: 0.65rem 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  .gl-pos-selected-customer > span {
+    color: var(--gl-text-subtle);
+  }
+
+  .gl-pos-selected-customer > strong {
+    flex: 1;
+    color: var(--gl-text-secondary);
+  }
+
+  .gl-pos-item-progress {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .gl-pos-item-progress li {
+    border: 1px solid var(--gl-border-soft);
+    border-radius: 9999px;
+    padding: 0.35rem 0.65rem;
+    color: var(--gl-text-subtle);
+    font-size: 0.6875rem;
+  }
+
+  .gl-pos-item-progress li.gl-pos-item-progress-active {
+    border-color: var(--gl-accent-border);
+    background: var(--gl-accent-bg);
+    color: var(--gl-accent);
+  }
+
+  .gl-pos-item-stage {
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .gl-pos-item-stage[hidden],
+  .gl-pos-grid[hidden] {
+    display: none !important;
+  }
+
+  .gl-pos-item-stage-actions,
+  .gl-pos-camera-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .gl-pos-item-stage-actions {
+    justify-content: space-between;
+    margin-top: 0.25rem;
+  }
+
+  .gl-pos-step-button {
+    min-height: 2.75rem;
+    width: auto;
+    margin: 0;
+    padding: 0.65rem 0.875rem;
+  }
+
+  .gl-pos-photo-stage video {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .gl-pos-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .gl-pos-order-card > .gl-pos-grid {
+    margin-top: 1.25rem;
+  }
+
+  .gl-pos-hint {
+    margin-top: 0.4rem;
+    color: var(--gl-text-subtle);
+    font-size: 0.6875rem;
+    line-height: 1.5;
+  }
+
+  .gl-pos-rush {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-block: 1.25rem;
+    border: 1px solid var(--gl-border-soft);
+    border-radius: 0.75rem;
+    background: var(--gl-surface-inset);
+    padding: 0.875rem 1rem;
+    cursor: pointer;
+  }
+
+  .gl-pos-rush > input,
+  .gl-pos-weekly-switch input,
+  .gl-pos-surcharge input {
+    accent-color: #7dd3fc;
+  }
+
+  .gl-pos-rush-copy {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .gl-pos-rush-copy strong {
+    color: var(--gl-text-secondary);
+    font-size: 0.8125rem;
+    font-weight: 500;
+  }
+
+  .gl-pos-rush-copy small {
+    color: var(--gl-text-subtle);
+    font-size: 0.6875rem;
+  }
+
+  .gl-pos-toggle {
+    width: 2.25rem;
+    height: 1.25rem;
+    border: 1px solid var(--gl-border-soft);
+    border-radius: 9999px;
+    background: var(--gl-surface-raised);
+  }
+
+  .gl-pos-rush input:checked ~ .gl-pos-toggle {
+    border-color: var(--gl-accent-border);
+    background: var(--gl-accent-bg-hover);
+  }
+
+  .gl-pos-textarea {
+    min-height: 5rem;
+    resize: vertical;
+  }
+
+  .gl-pos-scan-row {
+    display: grid;
+    align-items: end;
+    gap: 0.75rem;
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .gl-pos-scan-input {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  .gl-pos-button-secondary,
+  .gl-pos-add {
+    min-height: 2.75rem;
+    border: 1px solid var(--gl-accent-border);
+    border-radius: 0.625rem;
+    background: var(--gl-accent-bg);
+    padding: 0.65rem 0.875rem;
+    color: var(--gl-accent);
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 500;
+    transition: background-color 150ms;
+  }
+
+  .gl-pos-button-secondary:hover,
+  .gl-pos-add:hover {
+    background: var(--gl-accent-bg-hover);
+  }
+
+  .gl-pos-item-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .gl-pos-item {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+    border: 1px solid var(--gl-border-soft);
+    border-radius: 0.75rem;
+    background: rgba(10, 14, 26, 0.38);
+    padding: 1rem;
+  }
+
+  .gl-pos-item-top {
+    justify-content: space-between;
+    color: var(--gl-text-secondary);
+    font-size: 0.8125rem;
+  }
+
+  .gl-pos-item-top > div {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .gl-pos-item-number {
+    border: 1px solid var(--gl-border);
+    border-radius: 0.375rem;
+    padding: 0.2rem 0.4rem;
+    color: var(--gl-accent);
+    font-size: 0.625rem;
+    letter-spacing: 0.08em;
+  }
+
+  .gl-pos-remove {
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid var(--gl-border-soft);
+    border-radius: 0.5rem;
+    background: transparent;
+    color: var(--gl-text-muted);
+    cursor: pointer;
+    font-size: 1.125rem;
+  }
+
+  .gl-pos-descriptors {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .gl-pos-item-bottom {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .gl-pos-descriptors select {
+    min-height: 4rem;
+  }
+
+  .gl-pos-photo-row {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: minmax(0, 1.3fr) minmax(10rem, 0.7fr);
+  }
+
+  .gl-pos-photo-stage {
+    position: relative;
+    display: grid;
+    min-height: 12rem;
+    place-items: center;
+    overflow: hidden;
+    border: 1px dashed var(--gl-border-hover);
+    border-radius: 0.75rem;
+    background: var(--gl-surface-inset);
+    color: var(--gl-text-subtle);
+    cursor: crosshair;
+    font-size: 0.75rem;
+    text-align: center;
+  }
+
+  .gl-pos-photo-stage img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .gl-pos-photo-stage > span:not(.gl-pos-mark) {
+    max-width: 14rem;
+    padding: 1rem;
+  }
+
+  .gl-pos-photo-marks {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .gl-pos-mark {
+    position: absolute;
+    display: grid;
+    width: 1.4rem;
+    height: 1.4rem;
+    place-items: center;
+    transform: translate(-50%, -50%);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 9999px;
+    background: #7dd3fc;
+    color: #0a0e1a;
+    font-size: 0.625rem;
+    font-weight: 700;
+  }
+
+  .gl-pos-mark-spot {
+    background: #c8a0f0;
+  }
+
+  .gl-pos-mark-damage {
+    background: #fda4af;
+  }
+
+  .gl-pos-photo-tools {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .gl-pos-file {
+    width: 100%;
+    margin-bottom: 0.8rem;
+    color: var(--gl-text-muted);
+    font-size: 0.6875rem;
+  }
+
+  .gl-pos-add {
+    align-self: flex-start;
+    margin-top: 1rem;
+  }
+
+  .gl-pos-wash-note {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--gl-accent-border);
+    border-radius: 0.75rem;
+    background: var(--gl-accent-bg);
+    padding: 0.875rem 1rem;
+  }
+
+  .gl-pos-wash-note > span {
+    color: var(--gl-accent);
+    font-size: 1.25rem;
+  }
+
+  .gl-pos-wash-note strong {
+    color: var(--gl-text-secondary);
+    font-size: 0.8125rem;
+  }
+
+  .gl-pos-wash-note p {
+    margin-top: 0.25rem;
+    color: var(--gl-text-muted);
+    font-size: 0.6875rem;
+  }
+
+  .gl-pos-weekly-switch {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-top: 1.5rem;
+    color: var(--gl-text-secondary);
+    font-size: 0.8125rem;
+  }
+
+  .gl-pos-summary {
+    position: sticky;
+    top: 6.5rem;
+  }
+
+  .gl-pos-summary-card {
+    padding: 1.25rem;
+  }
+
+  .gl-pos-summary-empty {
+    margin-top: 1.25rem;
+    border: 1px dashed var(--gl-border-soft);
+    border-radius: 0.625rem;
+    padding: 1rem 0.75rem;
+    color: var(--gl-text-subtle);
+    font-size: 0.75rem;
+    text-align: center;
+  }
+
+  .gl-pos-summary-lines {
+    margin-top: 1.25rem;
+  }
+
+  .gl-pos-line-summaries {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+    color: var(--gl-text-secondary);
+    font-size: 0.75rem;
+  }
+
+  .gl-pos-summary-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .gl-pos-summary-item strong {
+    color: var(--gl-text-strong);
+    font-weight: 500;
+  }
+
+  .gl-pos-surcharge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.65rem;
+    color: var(--gl-text-secondary);
+    font-size: 0.75rem;
+  }
+
+  .gl-pos-surcharge span {
+    flex: 1;
+  }
+
+  .gl-pos-surcharge small {
+    color: var(--gl-text-muted);
+  }
+
+  .gl-pos-summary-total {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+    border-top: 1px solid var(--gl-border-soft);
+    padding-top: 1rem;
+    color: var(--gl-text-secondary);
+    font-size: 0.8125rem;
+  }
+
+  .gl-pos-summary-total strong {
+    color: var(--gl-text-strong);
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
+  .gl-pos-submit {
+    display: flex;
+    width: 100%;
+    min-height: 3rem;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    border: 1px solid rgba(125, 211, 252, 0.2);
+    border-radius: 0.7rem;
+    background: rgba(125, 211, 252, 0.15);
+    color: #7dd3fc;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: background-color 150ms, box-shadow 150ms;
+  }
+
+  .gl-pos-submit:hover {
+    background: rgba(125, 211, 252, 0.22);
+    box-shadow: 0 0 30px rgba(125, 211, 252, 0.05);
+  }
+
+  .gl-pos-secure-note {
+    margin-top: 0.75rem;
+    color: var(--gl-text-subtle);
+    font-size: 0.6875rem;
+    text-align: center;
+  }
+
+  .gl-pos-errors {
+    border: 1px solid var(--gl-danger-border);
+    border-radius: 0.75rem;
+    background: var(--gl-danger-bg);
+    padding: 1rem;
+    color: var(--gl-danger);
+    font-size: 0.8125rem;
+  }
+
+  .gl-pos-errors p {
+    margin-top: 0.35rem;
+  }
+
+  .gl-pos-confirmation {
+    max-width: 54rem;
+    margin-inline: auto;
+  }
+
+  .gl-pos-confirmation-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 1.5rem;
+  }
+
+  .gl-pos-confirmation-grid dt {
+    color: var(--gl-text-muted);
+    font-size: 0.7rem;
+  }
+
+  .gl-pos-confirmation-grid dd {
+    margin-top: 0.25rem;
+    color: var(--gl-text-secondary);
+    font-size: 0.85rem;
+  }
+
+  .gl-pos-confirmation-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--gl-border-soft);
+    padding-top: 1rem;
+    color: var(--gl-text-secondary);
+    font-size: 0.8125rem;
+  }
+
+  .gl-pos-confirmation-items > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .gl-pos-confirmation-notes {
+    margin-top: 1.25rem;
+    color: var(--gl-text-muted);
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
+  .gl-pos-another {
+    max-width: 15rem;
+    padding-inline: 1rem;
+  }
 }
 
 @media (min-width: 640px) {
@@ -1647,5 +2442,65 @@
 
   .gl-auth-panel .gl-auth-submit {
     transition: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  .gl-pos-form {
+    grid-template-columns: minmax(0, 1.35fr) minmax(16rem, 0.8fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .gl-pos-form {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .gl-pos-summary {
+    position: static;
+  }
+
+  .gl-pos-type-options {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 639px) {
+  .gl-pos-heading {
+    align-items: flex-start;
+  }
+
+  .gl-pos-card {
+    padding: 1rem;
+  }
+
+  .gl-pos-customer-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .gl-pos-customer-row > .gl-pos-label {
+    margin-bottom: 0;
+  }
+
+  .gl-pos-grid,
+  .gl-pos-photo-row,
+  .gl-pos-descriptors {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .gl-pos-item-bottom {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .gl-pos-scan-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .gl-pos-button-secondary {
+    justify-self: start;
+  }
+
+  .gl-pos-confirmation-grid {
+    grid-template-columns: minmax(0, 1fr);
   }
 }

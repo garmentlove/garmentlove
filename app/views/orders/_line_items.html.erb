@@ -1,0 +1,34 @@
+<% if order.rental? %>
+  <div class="gl-pos-grid">
+    <div><%= form.label :fulfillment_date, "Fulfillment date *", class: "gl-pos-label" %><%= form.date_field :fulfillment_date, required: true, class: "gl-pos-input" %></div>
+    <div class="gl-pos-weekly-switch"><%= form.check_box :weekly_preset, data: { action: "change->order-form#toggleWeekly" } %><%= form.label :weekly_preset, "Weekly preset" %></div>
+  </div>
+  <div class="gl-pos-grid" data-order-form-target="weeklyFields" hidden>
+    <div><%= form.label :target_day, "Target day", class: "gl-pos-label" %><%= form.select :target_day, Date::DAYNAMES.map { |day| [day, day.downcase] }, { prompt: "Select weekday" }, class: "gl-pos-input" %></div>
+    <div><%= form.label :season, "Season", class: "gl-pos-label" %><%= form.select :season, %w[year-round spring summer autumn winter], { prompt: "Select season" }, class: "gl-pos-input" %></div>
+  </div>
+<% end %>
+
+<% if order.wash_and_fold? %>
+  <div class="gl-pos-wash-note"><span>↻</span><div><strong>One wash &amp; fold item</strong><p>Scan the bag if it has a barcode, add a photo, then record its weight and service price.</p></div></div>
+  <div class="gl-pos-item-list" data-order-form-target="items">
+    <%= render "line_item_fields", index: "0", kind: "wash_and_fold" %>
+  </div>
+<% else %>
+  <p class="gl-pos-hint">
+    <% if order.cleaning? %>
+      Add each garment by scanning its barcode or choosing no barcode. A temporary barcode is generated if you skip scanning; then take a photo and enter its details.
+    <% elsif order.retail? %>
+      Scan each product or skip its barcode, take a photo if needed, then select inventory or enter its details.
+    <% else %>
+      Add each textile by barcode or skip, then take a photo and enter bundle details.
+    <% end %>
+  </p>
+  <div class="gl-pos-item-list" data-order-form-target="items"></div>
+  <template data-order-form-target="itemTemplate">
+    <%= render "line_item_fields", index: "NEW_RECORD", kind: order.order_type %>
+  </template>
+  <button type="button" class="gl-pos-add" data-action="order-form#addItem">
+    ＋ Add <%= order.cleaning? ? "garment" : (order.rental? ? "textile" : "product") %>
+  </button>
+<% end %>

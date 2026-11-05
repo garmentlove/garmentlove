@@ -1,0 +1,25 @@
+<% content_for :title, "Create order" %>
+
+<section class="gl-pos" data-controller="order-form" data-action="turbo:frame-load->order-form#frameLoaded submit->order-form#validateItems">
+  <div class="gl-pos-heading">
+    <div>
+      <p class="gl-eyebrow">Point of sale / New order</p>
+      <h1 class="gl-pos-title">Create an order</h1>
+      <p class="gl-subtitle">Build a service ticket for a customer.</p>
+    </div>
+    <%= link_to "Customers", customers_path, class: "gl-button-quiet", data: { turbo_frame: "_top" } %>
+  </div>
+
+  <% if @order&.errors&.any? %>
+    <div class="gl-pos-errors" role="alert">
+      <strong>Order not saved</strong>
+      <% @order.errors.full_messages.each do |message| %>
+        <p><%= message %></p>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%= turbo_frame_tag "order_flow" do %>
+    <%= render "workflow" %>
+  <% end %>
+</section>

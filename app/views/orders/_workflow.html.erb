@@ -1,0 +1,114 @@
+<% if @step == "customer" %>
+  <section class="gl-pos-card gl-pos-order-card gl-pos-wizard-step">
+    <div class="gl-pos-card-heading">
+      <div><p class="gl-pos-kicker">Step 1 of 3</p><h2>Select or create a customer</h2></div>
+      <span class="gl-pos-step">01</span>
+    </div>
+    <%= form_with url: new_order_path, method: :get, class: "gl-pos-customer-select" do |form| %>
+      <%= hidden_field_tag :step, "order_type" %>
+      <%= form.label :customer_id, "Customer", class: "gl-pos-label" %>
+      <%= form.collection_select :customer_id, @customers, :id, :name, { prompt: "Choose a customer" }, required: true, class: "gl-pos-input" %>
+      <%= form.submit "Continue to order type", class: "gl-pos-submit" %>
+    <% end %>
+    <div class="gl-pos-wizard-divider"><span>or</span></div>
+    <%= link_to "+ Create a new customer", new_customer_path(return_to_order: true), class: "gl-pos-button-secondary", data: { turbo_frame: "order_flow" } %>
+  </section>
+<% elsif @step == "order_type" %>
+  <section class="gl-pos-card gl-pos-order-card gl-pos-wizard-step">
+    <div class="gl-pos-card-heading">
+      <div><p class="gl-pos-kicker">Step 2 of 3</p><h2>Select an order type</h2></div>
+      <span class="gl-pos-step">02</span>
+    </div>
+    <p class="gl-pos-hint">Customer: <strong><%= @customer.name %></strong></p>
+    <div class="gl-pos-type-options gl-pos-type-options-wizard">
+      <% Order.order_types.each_key do |type| %>
+        <% label = { "cleaning" => "Dry Cleaning", "wash_and_fold" => "Wash & Fold", "retail" => "Retail", "rental" => "Rental" }.fetch(type) %>
+        <%= link_to new_order_path(step: "order_values", customer_id: @customer.id, order_type: type),
+              class: "gl-pos-type-option gl-pos-type-option-card",
+              data: { turbo_frame: "order_flow" } do %>
+          <strong><%= label %></strong>
+          <span>Continue with <%= label.downcase %></span>
+        <% end %>
+      <% end %>
+    </div>
+    <%= link_to "← Change customer", new_order_path, class: "gl-link-back", data: { turbo_frame: "order_flow" } %>
+  </section>
+<% else %>
+  <%= form_with model: @order, class: "gl-pos-form", multipart: true, data: { turbo_frame: "_top" } do |form| %>
+    <%= form.hidden_field :customer_id, value: @customer.id %>
+    <%= form.hidden_field :order_type, value: @order.order_type %>
+    <div class="gl-pos-main">
+      <section class="gl-pos-card gl-pos-order-card">
+        <div class="gl-pos-card-heading">
+          <div><p class="gl-pos-kicker">Step 3 of 3 / Order values</p><h2>Order details</h2></div>
+          <span class="gl-pos-step">03</span>
+        </div>
+        <div class="gl-pos-selected-customer">
+          <span>Customer</span>
+          <strong><%= @customer.name %></strong>
+          <%= link_to "Change", new_order_path, class: "gl-pos-inline-link", data: { turbo_frame: "order_flow" } %>
+        </div>
+        <div class="gl-pos-selected-customer">
+          <span>Order type</span>
+          <strong><%= @order.order_type.humanize %></strong>
+          <%= link_to "Change", new_order_path(step: "order_type", customer_id: @customer.id), class: "gl-pos-inline-link", data: { turbo_frame: "order_flow" } %>
+        </div>
+        <div class="gl-pos-grid">
+          <div>
+            <%= form.label :due_at, "Due date & time *", class: "gl-pos-label" %>
+            <%= form.datetime_local_field :due_at, required: true, class: "gl-pos-input" %>
+          </div>
+          <div class="gl-pos-piece-count">
+            <%= form.label :pieces_count, "Amount of pieces", class: "gl-pos-label" %>
+            <%= form.number_field :pieces_count, min: 0, value: @order.pieces_count, class: "gl-pos-input" %>
+          </div>
+        </div>
+        <label class="gl-pos-rush">
+          <%= form.check_box :rush %>
+          <span class="gl-pos-rush-copy"><strong>Rush order</strong><small>Prioritize this ticket for faster turnaround</small></span>
+          <span class="gl-pos-toggle" aria-hidden="true"></span>
+        </label>
+        <%= form.label :notes, "Order notes", class: "gl-pos-label" %>
+        <%= form.text_area :notes, rows: 3, placeholder: "Add special instructions or customer preferences…", class: "gl-pos-input gl-pos-textarea" %>
+      </section>
+
+      <section class="gl-pos-card gl-pos-line-card">
+        <div class="gl-pos-card-heading">
+          <div><p class="gl-pos-kicker">Add items</p><h2><%= @order.order_type.humanize %> items</h2></div>
+          <span class="gl-pos-step">04</span>
+        </div>
+        <%= turbo_frame_tag "order_line_items",
+              data: { order_type: @order.order_type, order_form_target: "lineItemsFrame" } do %>
+          <%= render "line_items", form: form, order: @order %>
+        <% end %>
+      </section>
+    </div>
+
+    <aside class="gl-pos-summary">
+      <section class="gl-pos-card gl-pos-summary-card">
+        <div class="gl-pos-card-heading"><div><p class="gl-pos-kicker">Order summary</p><h2>Review ticket</h2></div></div>
+        <p class="gl-pos-summary-empty" data-order-form-target="summaryEmpty">Add line items to build the order.</p>
+        <div class="gl-pos-line-summaries" data-order-form-target="summaryLines"></div>
+        <div class="gl-pos-summary-lines">
+          <% if @surcharges.any? %>
+            <fieldset>
+              <legend class="gl-pos-label">Surcharges</legend>
+              <% @surcharges.each do |surcharge| %>
+                <label class="gl-pos-surcharge">
+                  <%= check_box_tag "order[surcharge_ids][]", surcharge.id, false, id: "surcharge_#{surcharge.id}", data: { surcharge_amount: surcharge.amount, surcharge_modifier: surcharge.modifer, action: "change->order-form#refreshTotal" } %>
+                  <span><%= surcharge.description.presence || surcharge.modifer.humanize %></span>
+                  <small><%= surcharge.modifer == "procentage" ? "#{surcharge.amount}%" : number_to_currency(surcharge.amount / 100.0) %></small>
+                </label>
+              <% end %>
+            </fieldset>
+          <% else %>
+            <p class="gl-pos-hint">No surcharges have been configured.</p>
+          <% end %>
+        </div>
+        <div class="gl-pos-summary-total"><span>Estimated total</span><strong data-order-form-target="total">$0.00</strong></div>
+        <%= form.submit "Create order", class: "gl-pos-submit" %>
+        <p class="gl-pos-secure-note">Order is saved as pending</p>
+      </section>
+    </aside>
+  <% end %>
+<% end %>

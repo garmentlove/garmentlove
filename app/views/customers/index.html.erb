@@ -11,10 +11,16 @@
       <h1 class="gl-title">Customers</h1>
       <p class="gl-subtitle">A clear view of the people behind every great fit.</p>
     </div>
-    <%= link_to new_customer_path, class: "gl-button" do %>
+    <div class="gl-actions">
+      <%= link_to new_order_path, class: "gl-button" do %>
+        <span aria-hidden="true" class="gl-mark-plus">+</span>
+        New order
+      <% end %>
+      <%= link_to new_customer_path, class: "gl-button-secondary" do %>
       <span aria-hidden="true" class="gl-mark-plus">+</span>
       New customer
-    <% end %>
+      <% end %>
+    </div>
   </div>
 
   <div class="gl-summary-list">

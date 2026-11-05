@@ -1,18 +1,20 @@
 <% content_for :title, "New customer" %>
 
-<section class="gl-page gl-page-narrow">
-  <%= link_to customers_path, class: "gl-link-back" do %>
-    <span aria-hidden="true">←</span>
-    Customer directory
-  <% end %>
+<%= turbo_frame_tag "order_flow" do %>
+  <section class="gl-page gl-page-narrow">
+    <%= link_to(params[:return_to_order].present? ? new_order_path : customers_path, class: "gl-link-back", data: { turbo_frame: params[:return_to_order].present? ? "order_flow" : "_top" }) do %>
+      <span aria-hidden="true">←</span>
+      <%= params[:return_to_order].present? ? "Back to order" : "Customer directory" %>
+    <% end %>
 
-  <div>
-    <p class="gl-eyebrow">Customer directory / New</p>
-    <h1 class="gl-title">Add a customer</h1>
-    <p class="gl-subtitle">Create an account and save their contact details.</p>
-  </div>
+    <div>
+      <p class="gl-eyebrow">Customer directory / New</p>
+      <h1 class="gl-title">Add a customer</h1>
+      <p class="gl-subtitle">Create an account and save their contact details.</p>
+    </div>
 
-  <div class="gl-form-card">
-    <%= render "form", customer: @customer %>
-  </div>
-</section>
+    <div class="gl-form-card">
+      <%= render "form", customer: @customer %>
+    </div>
+  </section>
+<% end %>

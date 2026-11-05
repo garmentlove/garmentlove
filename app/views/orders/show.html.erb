@@ -1,0 +1,34 @@
+<% content_for :title, "Order ##{@order.id}" %>
+
+<section class="gl-pos gl-pos-confirmation">
+  <p class="gl-eyebrow">Point of sale / Order saved</p>
+  <h1 class="gl-pos-title">Order #<%= @order.id %></h1>
+  <% if notice.present? %><p class="gl-notice"><%= notice %></p><% end %>
+  <div class="gl-pos-card">
+    <div class="gl-pos-confirmation-heading">
+      <div><p class="gl-pos-kicker">Customer</p><h2><%= @order.customer.name %></h2></div>
+      <span class="gl-badge"><%= { "cleaning" => "Dry Cleaning", "wash_and_fold" => "Wash & Fold", "retail" => "Retail", "rental" => "Rental" }.fetch(@order.order_type) %></span>
+    </div>
+    <dl class="gl-pos-confirmation-grid">
+      <div><dt>Due date &amp; time</dt><dd><%= l(@order.due_at, format: :long) %></dd></div>
+      <% if @order.fulfillment_date.present? %><div><dt>Fulfillment date</dt><dd><%= l(@order.fulfillment_date, format: :long) %></dd></div><% end %>
+      <div><dt>Pieces</dt><dd><%= @order.pieces %></dd></div>
+      <div><dt>Rush</dt><dd><%= @order.rush? ? "Yes" : "No" %></dd></div>
+    </dl>
+    <% if @order.weekly_preset? %>
+      <p class="gl-pos-confirmation-notes"><strong>Weekly target</strong><br><%= @order.target_day.titleize %> · <%= @order.season.titleize %></p>
+    <% end %>
+    <div class="gl-pos-confirmation-items">
+      <% @order.line_items.each do |line_item| %>
+        <div><span><%= line_item.item.name.presence || "Item" %> × <%= line_item.quantity %></span><strong><%= number_to_currency(line_item.price_cents / 100.0) %></strong></div>
+      <% end %>
+      <% subtotal = @order.line_items.sum(&:price_cents) %>
+      <% @order.surcharge_lines.each do |surcharge_line| %>
+        <div><span><%= surcharge_line.price_surcharge.description.presence || surcharge_line.price_surcharge.modifer.humanize %></span><strong><%= number_to_currency(surcharge_line.price_cents(subtotal) / 100.0) %></strong></div>
+      <% end %>
+    </div>
+    <% if @order.notes.present? %><p class="gl-pos-confirmation-notes"><strong>Notes</strong><br><%= @order.notes %></p><% end %>
+    <div class="gl-pos-summary-total"><span>Order total</span><strong><%= number_to_currency(@order.price_cents / 100.0) %></strong></div>
+  </div>
+  <%= link_to "Create another order", new_order_path, class: "gl-pos-submit gl-pos-another" %>
+</section>

@@ -12,6 +12,7 @@ class Order::LineItem < ApplicationRecord
   validates :item,
             uniqueness: { scope: :order, message: "has already been added to this order" },
             if: ->(line_item) { line_item.item.ownable? }
+  validates :quantity, numericality: { only_integer: true, greater_than: 0 }
 
   before_save :assign_item_to_customer
 
@@ -51,8 +52,8 @@ class Order::LineItem < ApplicationRecord
     end
 
     def order_must_not_be_wash_and_fold
-      if order.wash_and_fold? && order.line_items.count > 0
-        errors.add(:order, "cannot add items to a wash and fold order")
+      if order.wash_and_fold? && order.line_items.count > 0 && new_record?
+        errors.add(:order, "can only have one item on a wash and fold order")
       end
     end
 end

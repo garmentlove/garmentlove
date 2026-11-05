@@ -16,6 +16,16 @@ class CustomersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "renders the new customer form in the POS turbo frame" do
+    get new_customer_url(return_to_order: true), headers: { "Turbo-Frame" => "order_flow" }
+
+    assert_response :success
+    assert_select "turbo-frame#order_flow" do
+      assert_select 'input[name="return_to_order"][value="true"]'
+      assert_select "h1", text: "Add a customer"
+    end
+  end
+
   test "should create customer" do
     assert_difference("Customer.count") do
       post customers_url, params: { customer: { first_name: "Cristie", last_name: "Bednar" } }

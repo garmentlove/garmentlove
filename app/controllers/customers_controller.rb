@@ -27,7 +27,13 @@ class CustomersController < ApplicationController
 
     respond_to do |format|
       if @customer.save
-        format.html { redirect_to @customer, notice: "Customer was successfully created." }
+        format.html do
+          if params[:return_to_order].present?
+            redirect_to new_order_path(step: "order_type", customer_id: @customer.id), status: :see_other
+          else
+            redirect_to @customer, notice: "Customer was successfully created."
+          end
+        end
         format.json { render :show, status: :created, location: @customer }
       else
         build_associations

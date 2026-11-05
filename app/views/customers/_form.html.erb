@@ -1,4 +1,5 @@
 <%= form_with(model: customer, class: "gl-form") do |form| %>
+  <%= hidden_field_tag :return_to_order, true if params[:return_to_order].present? %>
   <% if customer.errors.any? %>
     <div id="error_explanation" class="gl-form-errors" role="alert">
       <h2 class="gl-form-errors-title"><%= pluralize(customer.errors.count, "error") %> prohibited this customer from being saved:</h2>
@@ -36,7 +37,7 @@
     <%= form.submit "Create anyway?", class: "gl-submit" %>
   <% else %>
     <div class="gl-form-actions">
-      <%= link_to "Cancel", customer.persisted? ? customer_path(customer) : customers_path, class: "gl-button-quiet gl-form-cancel" %>
+      <%= link_to "Cancel", params[:return_to_order].present? ? new_order_path : (customer.persisted? ? customer_path(customer) : customers_path), class: "gl-button-quiet gl-form-cancel", data: { turbo_frame: params[:return_to_order].present? ? "order_flow" : "_top" } %>
       <%= form.submit class: "gl-submit" %>
     </div>
   <% end %>

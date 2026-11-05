@@ -9,6 +9,12 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <% if controller_name == "orders" %>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <% end %>
+
     <%= yield :head %>
 
     <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
@@ -30,7 +36,7 @@
           <span class="gl-brand-mark">GL</span>
           <span>
             <span class="gl-brand-name">GarmentLove</span>
-            <span class="gl-brand-caption">Customer workspace</span>
+            <span class="gl-brand-caption"><%= controller_name == "orders" ? "Point of sale" : "Customer workspace" %></span>
           </span>
 
           <%= button_to "Sign out", session_path, method: :delete, class: "gl-button-quiet" %>

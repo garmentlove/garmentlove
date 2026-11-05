@@ -51,7 +51,7 @@ class Item < ApplicationRecord
     end
 
     def can_set_manual_price
-      unless manual_price_cents.present? && unit_price_cents.present?
+      unless manual_price_cents.present? || unit_price_cents.present?
         errors.add(:price, "must be manually set or have a unit price")
       end
     end

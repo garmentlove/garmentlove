@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.2].define(version: 2026_10_11_235603) do
+ActiveRecord::Schema[8.2].define(version: 2026_10_12_000000) do
   create_table "access_tokens", force: :cascade do |t|
     t.integer "identity_id", null: false
     t.string "token"
@@ -147,6 +147,8 @@ ActiveRecord::Schema[8.2].define(version: 2026_10_11_235603) do
     t.integer "unit_price_cents"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.json "annotations", default: [], null: false
+    t.json "details", default: {}, null: false
     t.index ["customer_id"], name: "index_items_on_customer_id"
   end
 
@@ -190,6 +192,10 @@ ActiveRecord::Schema[8.2].define(version: 2026_10_11_235603) do
     t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "fulfillment_date"
+    t.boolean "weekly_preset", default: false, null: false
+    t.string "target_day"
+    t.string "season"
     t.index ["customer_id"], name: "index_orders_on_customer_id"
   end
 

@@ -6,6 +6,13 @@ Rails.application.routes.draw do
   end
 
   resources :customers
+
+  resources :orders, only: %i[ new create show ] do
+    scope module: :orders do
+      resources :items, only: %i[ index show new create edit update destroy ]
+    end
+  end
+
   root "customers#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
