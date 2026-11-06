@@ -7,7 +7,8 @@ json.homephone customer.homephone&.number
 
 json.email customer.email&.address
 
-json.address customer.address&.mailing
-json.billing_address customer.billing_address&.mailing
+json.addresses customer.addresses do |address|
+  json.extract! address, :designation, :street, :street2, :city, :state, :country, :zip
+end
 
 json.url customer_url(customer, format: :json)

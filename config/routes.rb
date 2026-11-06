@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  namespace :app do
+    resources :addresses
+    resource :settings, only: %i[ show ]
+    resource :profile, only: %i[ edit show update ]
+
+    resource :session do
+      scope module: :sessions do
+        resources :tokens, only: :show, param: :token
+      end
+    end
+  end
+
   resource :session do
     scope module: :sessions do
       resource :magic_link

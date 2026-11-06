@@ -19,7 +19,7 @@ class AddressTest < ActiveSupport::TestCase
                               state: "ny ",
                               country: " us ",
                               zip: " 12345 ",
-                              designation: :primary,
+                              designation: :other,
                               addressable: customers(:one))
     assert_equal "MAIN ST", address.street
     assert_equal "APT 5", address.street2

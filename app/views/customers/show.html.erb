@@ -72,6 +72,10 @@
           <% end %>
         </dl>
       </section>
+
+      <section class="gl-detail-card">
+        <%= link_to "Sign in as Customer", app_session_token_path(@customer.identity.signed_id(purpose: :sign_in)), target: "_new" %>
+      </section>
     </div>
   </div>
 </section>

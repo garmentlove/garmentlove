@@ -1,0 +1,81 @@
+
+<%# locals: (address:, designations:nil ) %>
+
+<%= form_with model: [ :app, address] do |form| %>
+  <% if address.errors.any? %>
+    <div id="error_explanation" class="gl-form-errors" role="alert">
+      <h2 class="gl-form-errors-title"><%= pluralize(address.errors.count, "error") %> prohibited your address from being saved:</h2>
+
+      <ul class="gl-form-errors-list">
+        <% address.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="gl-form-grid gl-form-grid-two">
+    <% if designations %>
+      <div class="gl-form-field-wide">
+        <%= form.label :designation, class: "gl-form-label" %>
+        <%= form.select :designation, designations.map { |value| [ value.humanize, value ] } , {}, class: ["gl-input", address.errors[:designation].any? ? "gl-input-error" : nil] %>
+      </div>
+    <% else %>
+      <div class="gl-form-field-wide">
+        <%= label_tag :designation, address.designation.humanize, class: ["gl-form-label"] %>
+      </div>
+    <% end %>
+
+    <div class="gl-form-field-wide">
+      <%= form.label :street, class: "gl-form-label" %>
+      <%= form.text_field :street, 
+                                  autocomplete: "address-line1", 
+                                  class: ["gl-input", address.errors[:street].present? ? "gl-input-error" : nil],
+                                  data: { action: "input->empty-destroy#update", 
+                                          empty_destroy_target: "inputs" } %>
+    </div>
+    <div class="gl-form-field-wide">
+      <%= form.label :street2, class: "gl-form-label" %>
+      <%= form.text_field :street2, 
+                                  autocomplete: "address-line2", 
+                                  class: ["gl-input", address.errors[:street2].present? ? "gl-input-error" : nil],
+                                  data: { action: "input->empty-destroy#update", 
+                                          empty_destroy_target: "inputs" } %>
+    </div>
+    <div class="gl-form-field">
+      <%= form.label :city, class: "gl-form-label" %>
+      <%= form.text_field :city, 
+                                  autocomplete: "address-level2", 
+                                  class: ["gl-input", address.errors[:city].present? ? "gl-input-error" : nil],
+                                  data: { action: "input->empty-destroy#update", 
+                                          empty_destroy_target: "inputs" } %>
+    </div>
+    <div class="gl-form-field">
+      <%= form.label :state, class: "gl-form-label" %>
+      <%= form.text_field :state, 
+                                  autocomplete: "address-level1", 
+                                  class: ["gl-input", address.errors[:state].present? ? "gl-input-error" : nil],
+                                  data: { action: "input->empty-destroy#update", 
+                                          empty_destroy_target: "inputs" } %>
+    </div>
+    <div class="gl-form-field">
+      <%= form.label :zip, class: "gl-form-label" %>
+      <%= form.text_field :zip, 
+                                  autocomplete: "postal-code", 
+                                  class: ["gl-input", address.errors[:zip].present? ? "gl-input-error" : nil],
+                                  data: { action: "input->empty-destroy#update", 
+                                          empty_destroy_target: "inputs" } %>
+    </div>
+    <div class="gl-form-field">
+      <%= form.label :country, class: "gl-form-label" %>
+      <%= form.text_field :country, 
+                                  autocomplete: "country-name", 
+                                  class: ["gl-input", address.errors[:country].present? ? "gl-input-error" : nil],
+                                  data: { action: "input->empty-destroy#update", 
+                                          empty_destroy_target: "inputs" } %>
+    </div>
+    <div class="gl-form-actions">
+      <%= form.submit class: "gl-submit" %>
+    </div>
+  </div>
+<% end %>
