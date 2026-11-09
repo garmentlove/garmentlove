@@ -1,3 +1,4 @@
-<%= render "customers/customer", customer: @customer %>
-
-<%= link_to "Edit Profile", edit_app_profile_path, class: "gl-button" %>
+<div id="<%= dom_id @customer %>" class="flex flex-col gap-5">
+  <%= render "app/profiles/profile", customer: @customer %>
+  <%= turbo_frame_tag :edit_profile, src: edit_app_profile_path, target: "_top" %>
+</div>

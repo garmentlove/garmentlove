@@ -1,0 +1,11 @@
+<header class="sticky top-0 gl-header z-999">
+  <div class="gl-header-inner">
+    <span class="gl-brand-mark">GL</span>
+    <span>
+      <span class="gl-brand-name">GarmentLove</span>
+      <span class="gl-brand-caption"><%= controller_name == "orders" ? "Point of sale" : "Customer workspace" %></span>
+    </span>
+
+    <%= button_to "Sign out", session_path, method: :delete, class: "gl-button-quiet" %>
+  </div>
+</header>

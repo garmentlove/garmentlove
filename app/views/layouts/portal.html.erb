@@ -25,10 +25,13 @@
 
   <body class="gl-app">
     <div class="gl-background">
+      <%= render "shared/body/header" %>
       <main class="gl-main">
         <%= render "shared/body/flash" %>
         <%= yield %>
       </main>
+
+      <%= render "app/shared/body/dock" %>
     </div>
   </body>
 </html>

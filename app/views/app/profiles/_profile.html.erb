@@ -1,0 +1,11 @@
+<div id="<%= dom_id @customer, :profile %>">  
+  <div class="flex flex-col gap-5 justify-center items-center min-w-full">
+    <div class="gl-avatar w-32 h-32">
+      <%= @customer.initials %>
+    </div>
+    <div class="gl-identity-copy text-3xl">
+      <h2 class="gl-customer-name"><%= @customer.name.presence || "Unnamed customer" %></h2>
+      <p class="gl-caption text-center">Customer since <%= @customer.created_at.strftime("%b %Y") %></p>
+    </div>
+  </div>
+</div>

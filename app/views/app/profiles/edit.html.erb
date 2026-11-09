@@ -1,1 +1,3 @@
-<%= render "app/profiles/form", customer: Current.identity.userable %>
+<%= turbo_frame_tag :edit_profile do %>
+  <%= render "app/profiles/form", customer: Current.identity.userable %>
+<% end %>
