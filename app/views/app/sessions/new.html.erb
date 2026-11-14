@@ -1,0 +1,26 @@
+<section class="gl-auth-panel gl-sign-in-panel <%= flash[:alert] ? "animation-shake" : "" %>">
+  <div class="gl-auth-brand">
+    <div class="gl-auth-brand-mark" aria-hidden="true">
+      <span>✦</span>
+    </div>
+    <p class="gl-auth-brand-name"><%= app_name %></p>
+  </div>
+
+  <div class="gl-auth-intro">
+    <h1>Welcome — Please Sign In</h1>
+    <p>Enter your registered name, email, or phone number to access your account.</p>
+  </div>
+
+  <%= render partial: "shared/body/flash" %>
+
+  <%= form_with url: app_session_path, class: "gl-form gl-auth-form" do |form| %>
+    <div class="gl-form-field">
+      <div class="gl-auth-label-row">
+        <%= form.label :sign_in, "Name / Email / Mobile Number", class: "gl-form-label" %>
+        <span class="gl-auth-verification"><span class="gl-auth-status-dot" aria-hidden="true"></span> Secure sign in</span>
+      </div>
+      <%= form.text_field :sign_in, required: true, autocomplete: "username", placeholder: "Name, email, or phone number", class: "gl-input gl-auth-input" %>
+    </div>
+    <%= form.submit "Sign In →", class: "gl-submit gl-auth-submit" %>
+  <% end %>
+</section>
